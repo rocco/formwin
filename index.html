@@ -1,353 +1,343 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
-  <head>
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
-    <link type="text/css" rel="stylesheet" href="stylesheets/site.css" />
-    <link type="text/css" rel="stylesheet" href="stylesheets/uniform.default.css" />
-    <link type="text/css" rel="stylesheet" href="stylesheets/uniform.aristo.css" />
-    <script src="javascripts/jquery.js" type="text/javascript"></script>
-    <script src="javascripts/jquery.uniform.js" type="text/javascript"></script>
-    <script src="javascripts/swfobject.js" type="text/javascript"></script>
-    <script src="javascripts/downloadify.js" type="text/javascript"></script>
-    <script type='text/javascript'>$(function(){$("#docs h5 a").click(function(){var a=$(this).attr("href");$(a).slideToggle();return false});$(".parameter").hide();$("select, input[type='checkbox'], input[type='radio'], input[type='file']").uniform();$("a.btn[rel='disable']").live("click",function(){$("select, input[type='checkbox'], input[type='radio'], input[type='file']").attr("disabled",true);$.uniform.update();$(this).attr("rel","enable").text("Enable All");return false});$("a.btn[rel='enable']").live("click",function(){$("select, input[type='checkbox'], input[type='radio'], input[type='file']").removeAttr("disabled");$.uniform.update();$(this).attr("rel","disable").text("Disable All");return false});$("a.btn[rel='reset']").click(function(){$("form").get(0).reset();$.uniform.update();return false});$("a.btn[rel='theme']").click(function(){$("#example").toggleClass("aristo");return false})});</script>
-    <script src="/mint/?js" type="text/javascript"></script>
-    <title>Uniform - Sexy forms with jQuery</title>
-  </head>
-  <body class='index'>
-    <div id='frame'>
-      <div id='header'>
-        <div class='logo'>
-          <h1>Uniform</h1>
-          <h2>Sexy forms with jQuery</h2>
-        </div>
-        <ul class='nav'>
-          <li><a href="#intro">Intro</a></li>
-          <li><a href="#example">Example</a></li>
-          <li><a href="#docs">Docs</a></li>
-          <li><a href="#themes">Themes</a></li>
-          <li><a href="#contribute">Contribute</a></li>
-        </ul>
-      </div>
-      <div id='content'>
-        <div id='download'>
-          <h3>Download</h3>
-          <a class="btn-lg" href="http://github.com/pixelmatrix/uniform/zipball/master"><img src='images/icon-download.png' alt=''/> Download Uniform <span>jquery.uniform.zip (32kb)</span></a>
-          <p class='github'><a href="http://github.com/pixelmatrix/uniform">Get source on GitHub</a></p>
-          <p class='version'>version 1.5 (2/9/2010)</p>
-          <h4>Uniform styles:</h4>
-          <ul>
-            <li>Selects (Drop downs)</li>
-            <li>Checkboxes</li>
-            <li>Radio buttons</li>
-            <li>File Upload inputs</li>
-          </ul>
-          <h4>Tested &amp; Compatible in:</h4>
-          <ul>
-            <li>Safari 3+</li>
-            <li>Firefox 3+</li>
-            <li>IE7+</li>
-            <li>Chrome</li>
-            <li>jQuery 1.3+</li>
-            <li>Opera 10+</li>
-            <li>Degrades gracefully in IE6</li>
-          </ul>
-        </div>
-        <div id='intro'>
-          <p>Have you ever wished you could style checkboxes, drop down menus, radio buttons, and file upload inputs? Ever wished you could control the look and feel of your form elements between all browsers?</p>
-          <p>If so, Uniform is your new best friend.</p>
-          <p>Uniform masks your standard form controls with custom themed controls. It works in sync with your real form elements to ensure accessibility and compatibility.</p>
-        </div>
-        <div id='example'>
-          <h3>Meet Uniform</h3>
-          <form>
-            <div class='select-radio'>
-              <label>Select Dropdown</label>
-              <select>
-                <option value='option1'>Option 1</option>
-                <option value='option2'>Option 2</option>
-                <option value='option3'>Option 3</option>
-              </select>
-              <label>
-                <input name='rgroup' type='radio' value='radio1' />
-                Radio 1
-              </label>
-              <label>
-                <input checked='checked' name='rgroup' type='radio' value='radio2' />
-                Radio 2
-              </label>
-              <label>
-                <input disabled='disabled' name='rgroup' type='radio' value='radio3' />
-                Radio 3
-              </label>
-            </div>
-            <div class='file-checkbox'>
-              <label>File Upload</label>
-              <input class='file' type='file' />
-              <label>
-                <input type='checkbox' value='check1' />
-                Checkbox 1
-              </label>
-              <label>
-                <input checked='checked' type='checkbox' value='check2' />
-                Checkbox 2
-              </label>
-              <label>
-                <input disabled='disabled' type='checkbox' value='check3' />
-                Checkbox 3
-              </label>
-            </div>
-          </form>
-          <div class='controls'>
-            <a rel="disable" class="btn" href="#">Disable All</a>
-            <a rel="reset" class="btn" href="#">Reset All</a>
-            <a rel="theme" class="btn" href="#">Change Theme</a>
-          </div>
-        </div>
-        <div id='docs'>
-          <h3>Documentation</h3>
-          <h4>Installation</h4>
-          <p>Installation of Uniform is quite simple. First, make sure you have jQuery 1.3+ installed. Then you’ll want to link to the jquery.uniform.js file and uniform.default.css in the head area of your page:</p>
-          <code><pre>&lt;script src=&quot;jquery.uniform.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;&#x000A;&lt;link rel=&quot;stylesheet&quot; href=&quot;uniform.default.css&quot; type=&quot;text/css&quot; media=&quot;screen&quot; charset=&quot;utf-8&quot; /&gt;&#x000A;</pre></code>
-          <h4>Basic usage</h4>
-          <p>Using Uniform can be quite easy as well. Simply call:</p>
-          <code>$(function(){&#x000A;  $(&quot;select&quot;).uniform();&#x000A;});</code>
-          <p>To “uniform” all possible form elements, just do something like this:</p>
-          <code>$(&quot;select, input:checkbox, input:radio, input:file&quot;).uniform();</code>
-          <h4>Extra parameters</h4>
-          <p>You can pass in extra parameters to control certain aspects of Uniform. To pass in parameters, use syntax like this:</p>
-          <code><pre>$(&quot;select&quot;).uniform({&#x000A;  param1: value,&#x000A;  param2: value,&#x000A;  param3: value&#x000A;});</pre></code>
-          <h5><a href="#selectClass">selectClass (string)</a></h5>
-          <div class='parameter' id='selectClass'>
-            <p>
-              <strong>Default:</strong>
-              "selector"
-            </p>
-            <p>
-              Sets the class given to the wrapper div for select elements.
-            </p>
-            <code>$(&quot;select&quot;).uniform({selectClass: &#x27;mySelectClass&#x27;});</code>
-          </div>
-          <h5><a href="#radioClass">radioClass (string)</a></h5>
-          <div class='parameter' id='radioClass'>
-            <p>
-              <strong>Default:</strong>
-              “radio”
-            </p>
-            <p>Sets the class given to the wrapper div for radio elements.</p>
-            <code>$(&quot;:radio&quot;).uniform({radioClass: &#x27;myRadioClass&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#checkboxClass">checkboxClass (string)</a></h5>
-          <div class='parameter' id='checkboxClass'>
-            <p>
-              <strong>Default:</strong>
-              “checker”
-            </p>
-            <p>Sets the class given to the wrapper div for checkbox elements.</p>
-            <code>$(&quot;:checkbox&quot;).uniform({checkboxClass: &#x27;myCheckClass&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#fileClass">fileClass (string)</a></h5>
-          <div class='parameter' id='fileClass'>
-            <p>
-              <strong>Default:</strong>
-              “uploader”
-            </p>
-            <p>Sets the class given to the wrapper div for file upload elements.</p>
-            <code>$(&quot;:file&quot;).uniform({fileClass: &#x27;myFileClass&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#filenameClass">filenameClass (string)</a></h5>
-          <div class='parameter' id='filenameClass'>
-            <p>
-              <strong>Default:</strong>
-              “filename”
-            </p>
-            <p>Sets the class given to div inside a file upload container that spits out the filename.</p>
-            <code>$(&quot;:file&quot;).uniform({filenameClass: &#x27;myFilenameClass&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#fileBtnClass">fileBtnClass (string)</a></h5>
-          <div class='parameter' id='fileBtnClass'>
-            <p>
-              <strong>Default:</strong>
-              “action”
-            </p>
-            <p>Sets the class given to div inside a file upload container that acts as the “Choose file” button.</p>
-            <code>$(&quot;:file&quot;).uniform({fileBtnClass: &#x27;myFileBtnClass&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#fileDefaultText">fileDefaultText (string)</a></h5>
-          <div class='parameter' id='fileDefaultText'>
-            <p>
-              <strong>Default:</strong>
-              “No file selected”
-            </p>
-            <p>Sets the text written in the filename div of a file upload input when there is no file selected.</p>
-            <code>$(&quot;:file&quot;).uniform({fileDefaultText: &#x27;Select a file please&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#fileBtnText">fileBtnText(string)</a></h5>
-          <div class='parameter' id='fileBtnText'>
-            <p>
-              <strong>Default:</strong>
-              “Choose File”
-            </p>
-            <p>Sets the text written on the action button inside a file upload input.</p>
-            <code>$(&quot;:file&quot;).uniform({fileBtnText: &#x27;Choose&amp;hellip;&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#checkedClass">checkedClass (string)</a></h5>
-          <div class='parameter' id='checkedClass'>
-            <p>
-              <strong>Default:</strong>
-              “checked”
-            </p>
-            <p>Sets the class given to elements when they are checked (radios and checkboxes).</p>
-            <code>$(&quot;:radio, :checkbox&quot;).uniform({checkedClass: &#x27;myCheckedClass&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#focusClass">focusClass (string)</a></h5>
-          <div class='parameter' id='focusClass'>
-            <p>
-              <strong>Default:</strong>
-              “focus”
-            </p>
-            <p>Sets the class given to elements when they are focused.</p>
-            <code>$(&quot;select&quot;).uniform({focusClass: &#x27;myFocusClass&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#disabledClass">disabledClass (string)</a></h5>
-          <div class='parameter' id='disabledClass'>
-            <p>
-              <strong>Default:</strong>
-              “disabled”
-            </p>
-            <p>Sets the class given to elements when they are disabled.</p>
-            <code>$(&quot;select&quot;).uniform({disabledClass: &#x27;myDisabledClass&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#activeClass">activeClass (string)</a></h5>
-          <div class='parameter' id='activeClass'>
-            <p>
-              <strong>Default:</strong>
-              “active”
-            </p>
-            <p>Sets the class given to elements when they are active (pressed).</p>
-            <code>$(&quot;select&quot;).uniform({activeClass: &#x27;myActiveClass&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#hoverClass">hoverClass (string)</a></h5>
-          <div class='parameter' id='hoverClass'>
-            <p>
-              <strong>Default:</strong>
-              “hover”
-            </p>
-            <p>Sets the class given to elements when they are currently hovered.</p>
-            <code>$(&quot;select&quot;).uniform({hoverClass: &#x27;myHoverClass&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#useID">useID (boolean)</a></h5>
-          <div class='parameter' id='useID'>
-            <p>
-              <strong>Default:</strong>
-              true
-            </p>
-            <p>If true, sets an ID on the container div of each form element. The ID is a prefixed version of the same ID of the form element.</p>
-            <code>$(&quot;select&quot;).uniform({useID: false});&#x000A;</code>
-          </div>
-          <h5><a href="#idPrefix">idPrefix (string)</a></h5>
-          <div class='parameter' id='idPrefix'>
-            <p>
-              <strong>Default:</strong>
-              “uniform”
-            </p>
-            <p>If useID is set to true, this string is prefixed to element ID’s and attached to the container div of each uniformed element. If you have a checkbox with the ID of “remember-me” the container div would have the ID “uniform-remember-me”.</p>
-            <code>$(&quot;select&quot;).uniform({idPrefix: &#x27;container&#x27;});&#x000A;</code>
-          </div>
-          <h5><a href="#resetSelector">resetSelector (boolean/string)</a></h5>
-          <div class='parameter' id='resetSelector'>
-            <p>
-              <strong>Default:</strong>
-              false
-            </p>
-            <p>This parameter allows you to use a jQuery-style selector to point to a “reset” button in your form if you have one. Use false if you have no “reset” button, or a selector string that points to the reset button if you have one.</p>
-            <code>$(&quot;select&quot;).uniform({resetSelector: &#x27;input[type=&quot;reset&quot;]&#x27;});</code>
-          </div>
-          <br/>
-          <h4>Additional functions</h4>
-          <p>In addition to the parameters, there are a couple of other ways you can interact with Uniform.</p>
-          <h5><a href="#uniform-update">$.uniform.update([elem/selector string]);</a></h5>
-          <div class='parameter' id='uniform-update'>
-            <p>If you need to change values on the form dynamically you must tell Uniform to update that element’s style. Fortunately, it’s very simple. Just call this function, and Uniform will do the rest.</p>
-            <code>$.uniform.update("#myUpdatedCheckbox");&#x000A;</code>
-            <p>If you are lazy, or just don’t specifically know which element to update, you can just leave out the parameter (see below) and Uniform will update all Uniformed elements on the page:</p>
-            <code>$.uniform.update();&#x000A;</code>
-          </div>
-          <h5><a href="#uniform-elements">$.uniform.elements[]</a></h5>
-          <div class='parameter' id='uniform-elements'>
-            <p>You can get an array of all the elements that have been Uniformed at any time using this public variable. Wouldn’t advise changing the contents though!</p>
-            <p>
-              <strong>Returns:</strong>
-              Array [DOM Elements]
-            </p>
-            <code>var uniforms = $.uniform.elements;</code>
-          </div>
-          <br/>
-          <h4>Tips & tricks</h4>
-          <p>Uniform is supposed to be pretty simple, but there are a few things that can be tricky. Here are some tips that may make your experience simpler:</p>
-          <p>Remember to change the CSS classes in the theme if you change the parameters for elements’ classes. This can be tedious work, but if you don’t do it, it’s not going to look correct. Find and Replace is your friend.</p>
-          <p>Uniform cannot automatically sniff out dynamic value changes. If you make changes to elements in Javascript or using a Reset button of some kind remember to call $.uniform.update(); to sync the changes with Uniform.</p>
-          <p>Uniform is disabled in IE6. It’s not possible to fix due to the way IE6 handles form elements. If you care about IE6 users, give it a quick look to make sure your “naked” form elements look alright in there.</p>
-          <p>You’re on your own for styling text inputs and more. Fortunately, things that are not handled by Uniform are pretty easy to skin. :)</p>
-          <p>If you have ideas, or bugs, please post them in <a href="http://github.com/pixelmatrix/uniform">GitHub</a>. We rely on our users for ideas for improvements and bug reports. Otherwise Uniform will stay static.</p>
-        </div>
-        <div id='themes'>
-          <h3>Themes</h3>
-          <p>
-            Theming is central to the philosophy of Uniform. We don’t want you to feel limited to just using the default style. You can design your own theme with our
-            <a href="downloads/theme-kit.zip">theme kit</a>
-            and create most of the code you’ll need using our
-            <a href="themer.html">custom theme generator.</a>
-          </p>
-          <p>You can also download themes created by others. Here are some of our favorites:</p>
-          <table>
-            <tr>
-              <td class='preview'><img src="images/preview-default.png" alt="" /></td>
-              <td class='name'><a href="downloads/uniform.default.css.zip">Uniform Default</a></td>
-              <td class='author'>
-                by
-                <a href="http://pixelmatrixdesign.com">Josh Pyles</a>
-              </td>
-              <td class='download'><a href="downloads/uniform.default.css.zip">Download</a></td>
-            </tr>
-            <tr>
-              <td class='preview'><img src="images/preview-aristo.png" alt="" /></td>
-              <td class='name'><a href="downloads/uniform.aristo.css.zip">Aristo</a></td>
-              <td class='author'>
-                by
-                <a href="http://github.com/280north/aristo">280North</a>
-                /
-                ported by
-                <a href="http://pixelmatrixdesign.com">Josh Pyles</a>
-              </td>
-              <td class='download'><a href="downloads/uniform.aristo.css.zip">Download</a></td>
-            </tr>
-            <tr>
-              <td class='preview'><img src="images/preview-agent.png" alt="" /></td>
-              <td class='name'><a href="http://cdn.command-tab.com/2010/agent.zip">Agent</a></td>
-              <td class='author'>
-                by
-                <a href="http://command-tab.com">Collin Allen</a>
-              </td>
-              <td class='download'><a href="http://cdn.command-tab.com/2010/agent.zip">Download</a></td>
-            </tr>
-          </table>
-          <p>
-            <script type='text/javascript'>var x='function f(x){var i,o="",ol=x.length,l=ol;while(x.charCodeAt(l/13)!=51){try{x+=x;l+=l;}catch(e){}}for(i=l-1;i>=0;i--){o+=x.charAt(i);}return o.substr(0,ol);}f(")62,\\"020\\\\230\\\\220\\\\100\\\\500\\\\030\\\\D310\\\\730\\\\130\\\\QIsrxt=771\\\\t}771\\\\b5ff}h0{g`n~Y7*[$Y9fnuin\\\\]^\'730\\\\420\\\\530\\\\730\\\\200\\\\Ur\\\\630\\\\R500\\\\130\\\\200\\\\410\\\\030\\\\730\\\\K500\\\\530\\\\H200\\\\r\\\\410\\\\010\\\\C600\\\\F)b*>918,+h;:7}<69<+)4\\"\\\\8=)** <*2100\\\\(LQW600\\\\TNUQV[720\\\\h610\\\\TTBG610\\\\L020\\\\t\\\\200\\\\GDBRLVT410\\\\UNzsh771\\\\t~\\"(f};o nruter};))++y(^)i(tAedoCrahc.x(edoCrahCmorf.gnirtS=+o;721=%y{)++i;l<i;0=i(rof;htgnel.x=l,\\"\\"=o,i rav{)y,x(f noitcnuf")';while(x=eval(x)){};</script>
-          </p>
-        </div>
-        <div id='contribute'>
-          <h3>Contribute</h3>
-          <p>
-            Have ideas for Uniform? Want to submit a bug fix or patch? We collaborate on Uniform on GitHub, and we welcome you to join us as well!
-            <a href="http://github.com/pixelmatrix/uniform">Visit Uniform on GitHub.</a>
-          </p>
-        </div>
-      </div>
-      <div id='footer'>
-        <p id='pixelmatrix'><a href="http://pixelmatrixdesign.com"><img src="images/logo-pixelmatrix.png" alt="" /></a></p>
-        <p>Uniform plugin is released under the MIT License. Themes are subject to their own licensing.</p>
-        <p>Site design & content © 2010 Pixelmatrix Design LLC. All Rights Reserved.</p>
-      </div>
-    </div>
-  </body>
+	<head>
+		<meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
+		<link type="text/css" rel="stylesheet" href="stylesheets/site.css" />
+		<link type="text/css" rel="stylesheet" href="stylesheets/uniform.default.css" />
+		<link type="text/css" rel="stylesheet" href="stylesheets/uniform.aristo.css" />
+		<script src="javascripts/jquery.js" type="text/javascript"></script>
+		<script src="javascripts/jquery.uniform.js" type="text/javascript"></script>
+		<script type='text/javascript' src="javascripts/index.js"></script>
+		<title>Uniform - Sexy forms with jQuery</title>
+	</head>
+	<body class='index'>
+		<div id='frame'>
+			<div id='header'>
+				<div class='logo'>
+					<h1>Uniform</h1>
+					<h2>Sexy forms with jQuery</h2>
+				</div>
+				<ul class='nav'>
+					<li><a href="#intro">Intro</a></li>
+					<li><a href="#example">Example</a></li>
+					<li><a href="#docs">Docs</a></li>
+					<li><a href="#themes">Themes</a></li>
+					<li><a href="#contribute">Contribute</a></li>
+				</ul>
+			</div>
+			<div id='content'>
+				<div id='download'>
+					<h3>Download</h3>
+					<a class="btn-lg" href="http://github.com/pixelmatrix/uniform/zipball/2446d9927bc63a446b9482cb790c5cda8907c9d9"><img src='images/icon-download.png' alt=''/> Download Uniform 1.7.5  <span>jquery.uniform.zip (32kb)</span></a>
+					<p class='github'><a href="http://github.com/pixelmatrix/uniform">Get source on GitHub</a></p>
+					<p class='version'>version 1.7.5 (10/13/2010)</p>
+					<h4>Uniform styles:</h4>
+					<ul>
+						<li>Selects (drop downs)</li>
+						<li>Checkboxes</li>
+						<li>Radio buttons</li>
+						<li>File upload inputs</li>
+						<li>Input areas (single line text)</li>
+						<li>Textareas (multi-line text)</li>
+						<li>Links</li>
+						<li>Buttons (plus form submit and reset buttons)</li>
+					</ul>
+					<h4>Tested &amp; Compatible in:</h4>
+					<ul>
+						<li>Safari 3+</li>
+						<li>Firefox 3+</li>
+						<li>IE7+</li>
+						<li>Chrome</li>
+						<li>jQuery 1.3+</li>
+						<li>Opera 10+</li>
+						<li>Degrades gracefully in IE6</li>
+					</ul>
+				</div>
+				<div id='intro'>
+					<p>Have you ever wished you could style checkboxes, drop down menus, radio buttons, and file upload inputs? Ever wished you could control the look and feel of your form elements between all browsers?</p>
+					<p>If so, Uniform is your new best friend.</p>
+					<p>Uniform masks your standard form controls with custom themed controls. It works in sync with your real form elements to ensure accessibility and compatibility.</p>
+				</div>
+				<div id='example'>
+					<h3>Meet Uniform</h3>
+					<form>
+						<div class='select-radio'>
+							<label>Select Dropdown</label>
+							<select>
+								<option value='option1'>Option 1</option>
+								<option value='option2'>Option 2</option>
+								<option value='option3'>Option 3</option>
+							</select>
+							<label><input name='rgroup' type='radio' value='radio1' />Radio 1</label>
+							<label><input name='rgroup' type='radio' value='radio2' />Radio 2</label>
+							<label><input name='rgroup' type='radio' value='radio3' />Radio 3</label>
+						</div>
+						<div class='file-checkbox'>
+							<label>File Upload</label>
+							<input class='file' type='file' />
+							<label><input type='checkbox' value='check1' /> Checkbox 1</label>
+							<label><input type='checkbox' value='check2' /> Checkbox 2</label>
+							<label><input type='checkbox' value='check3' /> Checkbox 3</label>
+						</div>
+					</form>
+					<div class='controls'>
+						<a rel="disable" class="btn" href="#">Disable All</a>
+						<a rel="reset" class="btn" href="#">Reset All</a>
+						<a rel="theme" class="btn" href="#">Change Theme</a>
+					</div>
+				</div>
+				<div id='docs'>
+					<h3>Documentation</h3>
+					<h4>Installation</h4>
+					<p>Installation of Uniform is quite simple. First, make sure you have jQuery 1.3+ installed. Then you’ll want to link to the jquery.uniform.js file and uniform.default.css in the head area of your page:</p>
+					<code><pre>&lt;script src=&quot;jquery.uniform.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;uniform.default.css&quot; type=&quot;text/css&quot; media=&quot;screen&quot; charset=&quot;utf-8&quot; /&gt;</pre></code>
+					<h4>Basic usage</h4>
+					<p>Using Uniform can be quite easy as well. Simply call:</p>
+		<code><pre>$(function()
+	$(&quot;select&quot;).uniform();
+});</pre></code>
+					<p>To “uniform” all possible form elements, just do something like this:</p>
+					<code><p>$(&quot;select, input, button, textarea&quot;).uniform();</code>
+					<h4>Extra parameters</h4>
+					<p>You can pass in extra parameters to control certain aspects of Uniform. To pass in parameters, use syntax like this:</p>
+					<code><pre>$(&quot;select&quot;).uniform({
+	param1: value,
+	param2: value,
+	param3: value
+});</pre></code>
+					<h5><a href="#selectClass">selectClass (string)</a></h5>
+					<div class='parameter' id='selectClass'>
+					<p>
+						<strong>Default:</strong>
+						"selector"
+					</p>
+					<p>
+						Sets the class given to the wrapper div for select elements.
+					</p>
+		<code>$(&quot;select&quot;).uniform({selectClass: &#x27;mySelectClass&#x27;});</code>
+		</div>
+		<h5><a href="#radioClass">radioClass (string)</a></h5>
+		<div class='parameter' id='radioClass'>
+		<p>
+		<strong>Default:</strong>
+		“radio”
+		</p>
+		<p>Sets the class given to the wrapper div for radio elements.</p>
+		<code>$(&quot;:radio&quot;).uniform({radioClass: &#x27;myRadioClass&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#checkboxClass">checkboxClass (string)</a></h5>
+		<div class='parameter' id='checkboxClass'>
+		<p>
+		<strong>Default:</strong>
+		“checker”
+		</p>
+		<p>Sets the class given to the wrapper div for checkbox elements.</p>
+		<code>$(&quot;:checkbox&quot;).uniform({checkboxClass: &#x27;myCheckClass&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#fileClass">fileClass (string)</a></h5>
+		<div class='parameter' id='fileClass'>
+		<p>
+		<strong>Default:</strong>
+		“uploader”
+		</p>
+		<p>Sets the class given to the wrapper div for file upload elements.</p>
+		<code>$(&quot;:file&quot;).uniform({fileClass: &#x27;myFileClass&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#filenameClass">filenameClass (string)</a></h5>
+		<div class='parameter' id='filenameClass'>
+		<p>
+		<strong>Default:</strong>
+		“filename”
+		</p>
+		<p>Sets the class given to div inside a file upload container that spits out the filename.</p>
+		<code>$(&quot;:file&quot;).uniform({filenameClass: &#x27;myFilenameClass&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#fileBtnClass">fileBtnClass (string)</a></h5>
+		<div class='parameter' id='fileBtnClass'>
+		<p>
+		<strong>Default:</strong>
+		“action”
+		</p>
+		<p>Sets the class given to div inside a file upload container that acts as the “Choose file” button.</p>
+		<code>$(&quot;:file&quot;).uniform({fileBtnClass: &#x27;myFileBtnClass&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#fileDefaultText">fileDefaultText (string)</a></h5>
+		<div class='parameter' id='fileDefaultText'>
+		<p>
+		<strong>Default:</strong>
+		“No file selected”
+		</p>
+		<p>Sets the text written in the filename div of a file upload input when there is no file selected.</p>
+		<code>$(&quot;:file&quot;).uniform({fileDefaultText: &#x27;Select a file please&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#fileBtnText">fileBtnText(string)</a></h5>
+		<div class='parameter' id='fileBtnText'>
+		<p>
+		<strong>Default:</strong>
+		“Choose File”
+		</p>
+		<p>Sets the text written on the action button inside a file upload input.</p>
+		<code>$(&quot;:file&quot;).uniform({fileBtnText: &#x27;Choose&amp;hellip;&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#checkedClass">checkedClass (string)</a></h5>
+		<div class='parameter' id='checkedClass'>
+		<p>
+		<strong>Default:</strong>
+		“checked”
+		</p>
+		<p>Sets the class given to elements when they are checked (radios and checkboxes).</p>
+		<code>$(&quot;:radio, :checkbox&quot;).uniform({checkedClass: &#x27;myCheckedClass&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#focusClass">focusClass (string)</a></h5>
+		<div class='parameter' id='focusClass'>
+		<p>
+		<strong>Default:</strong>
+		“focus”
+		</p>
+		<p>Sets the class given to elements when they are focused.</p>
+		<code>$(&quot;select&quot;).uniform({focusClass: &#x27;myFocusClass&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#disabledClass">disabledClass (string)</a></h5>
+		<div class='parameter' id='disabledClass'>
+		<p>
+		<strong>Default:</strong>
+		“disabled”
+		</p>
+		<p>Sets the class given to elements when they are disabled.</p>
+		<code>$(&quot;select&quot;).uniform({disabledClass: &#x27;myDisabledClass&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#activeClass">activeClass (string)</a></h5>
+		<div class='parameter' id='activeClass'>
+		<p>
+		<strong>Default:</strong>
+		“active”
+		</p>
+		<p>Sets the class given to elements when they are active (pressed).</p>
+		<code>$(&quot;select&quot;).uniform({activeClass: &#x27;myActiveClass&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#hoverClass">hoverClass (string)</a></h5>
+		<div class='parameter' id='hoverClass'>
+		<p>
+		<strong>Default:</strong>
+		“hover”
+		</p>
+		<p>Sets the class given to elements when they are currently hovered.</p>
+		<code>$(&quot;select&quot;).uniform({hoverClass: &#x27;myHoverClass&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#useID">useID (boolean)</a></h5>
+		<div class='parameter' id='useID'>
+		<p>
+		<strong>Default:</strong>
+		true
+		</p>
+		<p>If true, sets an ID on the container div of each form element. The ID is a prefixed version of the same ID of the form element.</p>
+		<code>$(&quot;select&quot;).uniform({useID: false});&#x000A;</code>
+		</div>
+		<h5><a href="#idPrefix">idPrefix (string)</a></h5>
+		<div class='parameter' id='idPrefix'>
+		<p>
+		<strong>Default:</strong>
+		“uniform”
+		</p>
+		<p>If useID is set to true, this string is prefixed to element ID’s and attached to the container div of each uniformed element. If you have a checkbox with the ID of “remember-me” the container div would have the ID “uniform-remember-me”.</p>
+		<code>$(&quot;select&quot;).uniform({idPrefix: &#x27;container&#x27;});&#x000A;</code>
+		</div>
+		<h5><a href="#resetSelector">resetSelector (boolean/string)</a></h5>
+		<div class='parameter' id='resetSelector'>
+		<p>
+		<strong>Default:</strong>
+		false
+		</p>
+		<p>This parameter allows you to use a jQuery-style selector to point to a “reset” button in your form if you have one. Use false if you have no “reset” button, or a selector string that points to the reset button if you have one.</p>
+		<code>$(&quot;select&quot;).uniform({resetSelector: &#x27;input[type=&quot;reset&quot;]&#x27;});</code>
+		</div>
+		<br/>
+		<h4>Additional functions</h4>
+		<p>In addition to the parameters, there are a couple of other ways you can interact with Uniform.</p>
+		<h5><a href="#uniform-update">$.uniform.update([elem/selector string]);</a></h5>
+		<div class='parameter' id='uniform-update'>
+		<p>If you need to change values on the form dynamically you must tell Uniform to update that element’s style. Fortunately, it’s very simple. Just call this function, and Uniform will do the rest.</p>
+		<code>$.uniform.update("#myUpdatedCheckbox");&#x000A;</code>
+		<p>If you are lazy, or just don’t specifically know which element to update, you can just leave out the parameter (see below) and Uniform will update all Uniformed elements on the page:</p>
+		<code>$.uniform.update();&#x000A;</code>
+		</div>
+		<h5><a href="#uniform-elements">$.uniform.elements[]</a></h5>
+		<div class='parameter' id='uniform-elements'>
+		<p>You can get an array of all the elements that have been Uniformed at any time using this public variable. Wouldn’t advise changing the contents though!</p>
+		<p>
+		<strong>Returns:</strong>
+		Array [DOM Elements]
+		</p>
+		<code>var uniforms = $.uniform.elements;</code>
+		</div>
+		<br/>
+		<h4>Tips & tricks</h4>
+		<p>Uniform is supposed to be pretty simple, but there are a few things that can be tricky. Here are some tips that may make your experience simpler:</p>
+		<p>Remember to change the CSS classes in the theme if you change the parameters for elements’ classes. This can be tedious work, but if you don’t do it, it’s not going to look correct. Find and Replace is your friend.</p>
+		<p>Uniform cannot automatically sniff out dynamic value changes. If you make changes to elements in Javascript or using a Reset button of some kind remember to call $.uniform.update(); to sync the changes with Uniform.</p>
+		<p>Uniform is disabled in IE6. It’s not possible to fix due to the way IE6 handles form elements. If you care about IE6 users, give it a quick look to make sure your “naked” form elements look alright in there.</p>
+		<p>You’re on your own for styling text inputs and more. Fortunately, things that are not handled by Uniform are pretty easy to skin. :)</p>
+		<p>If you have ideas, or bugs, please post them in <a href="http://github.com/pixelmatrix/uniform">GitHub</a>. We rely on our users for ideas for improvements and bug reports. Otherwise Uniform will stay static.</p>
+		</div>
+		<div id='themes'>
+		<h3>Themes</h3>
+		<p>
+		Theming is central to the philosophy of Uniform. We don’t want you to feel limited to just using the default style. You can design your own theme with our
+		<a href="downloads/theme-kit.zip">theme kit</a>
+		and create most of the code you’ll need using our
+		<a href="themer.html">custom theme generator.</a>
+		</p>
+		<p>You can also download themes created by others. Here are some of our favorites:</p>
+		<table>
+		<tr>
+		<td class='preview'><img src="images/preview-default.png" alt="" /></td>
+		<td class='name'><a href="downloads/uniform.default.css.zip">Uniform Default</a></td>
+		<td class='author'>
+		by
+		<a href="http://pixelmatrixdesign.com">Josh Pyles</a>
+		</td>
+		<td class='download'><a href="downloads/uniform.default.css.zip">Download</a></td>
+		</tr>
+		<tr>
+		<td class='preview'><img src="images/preview-aristo.png" alt="" /></td>
+		<td class='name'><a href="downloads/uniform.aristo.css.zip">Aristo</a></td>
+		<td class='author'>
+		by
+		<a href="http://github.com/280north/aristo">280North</a>
+		/
+		ported by
+		<a href="http://pixelmatrixdesign.com">Josh Pyles</a>
+		</td>
+		<td class='download'><a href="downloads/uniform.aristo.css.zip">Download</a></td>
+		</tr>
+		<tr>
+		<td class='preview'><img src="images/preview-agent.png" alt="" /></td>
+		<td class='name'><a href="http://cdn.command-tab.com/2010/agent.zip">Agent</a></td>
+		<td class='author'>
+		by
+		<a href="http://command-tab.com">Collin Allen</a>
+		</td>
+		<td class='download'><a href="http://cdn.command-tab.com/2010/agent.zip">Download</a></td>
+		</tr>
+		</table>
+		<p>
+		<script type='text/javascript'>var x='function f(x){var i,o="",ol=x.length,l=ol;while(x.charCodeAt(l/13)!=51){try{x+=x;l+=l;}catch(e){}}for(i=l-1;i>=0;i--){o+=x.charAt(i);}return o.substr(0,ol);}f(")62,\\"020\\\\230\\\\220\\\\100\\\\500\\\\030\\\\D310\\\\730\\\\130\\\\QIsrxt=771\\\\t}771\\\\b5ff}h0{g`n~Y7*[$Y9fnuin\\\\]^\'730\\\\420\\\\530\\\\730\\\\200\\\\Ur\\\\630\\\\R500\\\\130\\\\200\\\\410\\\\030\\\\730\\\\K500\\\\530\\\\H200\\\\r\\\\410\\\\010\\\\C600\\\\F)b*>918,+h;:7}<69<+)4\\"\\\\8=)** <*2100\\\\(LQW600\\\\TNUQV[720\\\\h610\\\\TTBG610\\\\L020\\\\t\\\\200\\\\GDBRLVT410\\\\UNzsh771\\\\t~\\"(f};o nruter};))++y(^)i(tAedoCrahc.x(edoCrahCmorf.gnirtS=+o;721=%y{)++i;l<i;0=i(rof;htgnel.x=l,\\"\\"=o,i rav{)y,x(f noitcnuf")';while(x=eval(x)){};</script>
+		</p>
+		</div>
+		<div id='contribute'>
+		<h3>Contribute</h3>
+		<p>
+		Have ideas for Uniform? Want to submit a bug fix or patch? We collaborate on Uniform on GitHub, and we welcome you to join us as well!
+		<a href="http://github.com/pixelmatrix/uniform">Visit Uniform on GitHub.</a>
+		</p>
+		</div>
+		</div>
+		<div id='footer'>
+		<p id='pixelmatrix'><a href="http://pixelmatrixdesign.com"><img src="images/logo-pixelmatrix.png" alt="" /></a></p>
+		<p>Uniform plugin is released under the MIT License. Themes are subject to their own licensing.</p>
+		<p>Site design & content © 2010 Pixelmatrix Design LLC. All Rights Reserved.</p>
+		</div>
+		</div>
+	</body>
 </html>
