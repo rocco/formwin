@@ -276,6 +276,7 @@
 		<p>Uniform is supposed to be pretty simple, but there are a few things that can be tricky. Here are some tips that may make your experience simpler:</p>
 		<p>Remember to change the CSS classes in the theme if you change the parameters for elements’ classes. This can be tedious work, but if you don’t do it, it’s not going to look correct. Find and Replace is your friend.</p>
 		<p>Uniform cannot automatically sniff out dynamic value changes. If you make changes to elements in Javascript or using a Reset button of some kind remember to call $.uniform.update(); to sync the changes with Uniform.</p>
+		<p>When adding elements to the DOM, make sure you apply $('#newElement').uniform() to them yourself.  Uniform does not watch for DOM changes.</p>
 		<p>Uniform is disabled in IE6. It’s not possible to fix due to the way IE6 handles form elements. If you care about IE6 users, give it a quick look to make sure your “naked” form elements look alright in there.</p>
 		<p>You’re on your own for styling text inputs and more. Fortunately, things that are not handled by Uniform are pretty easy to skin. :)</p>
 		<p>If you have ideas, or bugs, please post them in <a href="http://github.com/pixelmatrix/uniform">GitHub</a>. We rely on our users for ideas for improvements and bug reports. Otherwise Uniform will stay static.</p>
