@@ -1,20 +1,25 @@
-/* formwin base styles - these should remain unchanged */
+/* 
+ * Formwin base styles - these should remain unchanged 
+ */
 
 /* 
 ------------------------------------
 label basics and general settings
 ------------------------------------
 */
-/* label container around input */
+
+/* label container around inputs */
 label {
 	display: inline-block;
-	position: relative;              /* so we can do "position: absolute;" inside */
+	position: relative; /* so we can do "position: absolute;" inside */
 	cursor: default;
+	vertical-align: top;
 }
 label.disabled {
 	cursor: auto;
 }
-/* hide selects, checklboxes and radio elements behind their value divs */
+
+/* hide selects, checklboxes and radios behind their value divs */
 label select,
 label input[type=checkbox],
 label input[type=radio] {
@@ -25,6 +30,7 @@ label input[type=radio] {
 	filter: alpha(opacity=0);
 	outline: none;
 }
+
 /* label text span */
 label span {
 	display: block;
@@ -37,6 +43,7 @@ label span {
 select elements
 ------------------------------------
 */
+
 /* value div on selects */
 label div.selectedvalue:before {
 	display: inline-block;
@@ -44,30 +51,36 @@ label div.selectedvalue:before {
 	vertical-align: top;
 	content: ' '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 label:active div.selectedvalue:before, 
 label.active div.selectedvalue:before {
 	content: '  '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 label.focus div.selectedvalue:before, 
 label.hover div.selectedvalue:before, 
 label:hover div.selectedvalue:before {
 	content: '   '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 label.focus:active div.selectedvalue:before,
 label.focus.active div.selectedvalue:before,
 label:hover:active div.selectedvalue:before,
 label.active:hover div.selectedvalue:before {
 	content: '    '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 label.disabled div.selectedvalue:before,
 label.disabled.active div.selectedvalue:before,
 label.disabled:active div.selectedvalue:before {
 	content: '     '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 label.focus div.selectedvalue:before,
 label.hover div.selectedvalue:before {
 	content: '      '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 label.active div.selectedvalue:before {
 	content: '       '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
@@ -78,8 +91,8 @@ label.active div.selectedvalue:before {
 text input elements
 ------------------------------------
 */
-label.texts:before,
-label.texts:after {
+label.formwintexts:before,
+label.formwintexts:after {
 	display: block;
 	position: absolute;
 	top: 0;
@@ -87,21 +100,23 @@ label.texts:after {
 	font-size: 1px;                  /* so we can have heights lower than default line height */
 	content: '';
 	overflow: hidden;
-
 }
+
 /* :before is a horizontal container with top-left corner and top border */
-label.texts:before {
+label.formwintexts:before {
 	left: 0;
 	width: 100%;                     /* use entire width */
 }
+
 /* :after is a vertical bar to the right of the input and contains right border and bottom-right corner */
-label.texts:after {
+label.formwintexts:after {
 	right: 0;
 	height: 100%;                    /* use entire height */
 	overflow: hidden;
 }
-label.texts textarea,
-label.texts input[type=text] {
+
+label.formwintexts textarea,
+label.formwintexts input[type=text] {
 	display: block;
 	padding: 0;
 	/* hide all input visuals */
@@ -109,68 +124,79 @@ label.texts input[type=text] {
 	outline: none;
 	background: none;
 }
-label.texts textarea {
+
+label.formwintexts textarea {
 	padding-right: 10px;             /* prevents horizontal scroll bar in IE */
 	overflow: auto;                  /* hides scroll bar in IE */
 }
+
 /* positive */
-label.texts.positive,
-label.texts.positive:before,
-label.texts.positive:after {
+label.formwintexts.positive,
+label.formwintexts.positive:before,
+label.formwintexts.positive:after {
 	content: ' '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 /* negative */
-label.texts.negative,
-label.texts.negative:before,
-label.texts.negative:after {
+label.formwintexts.negative,
+label.formwintexts.negative:before,
+label.formwintexts.negative:after {
 	content: '  '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 /* active */
-label.texts.active,
-label.texts.active:before,
-label.texts.active:after {
+label.formwintexts.active,
+label.formwintexts.active:before,
+label.formwintexts.active:after {
 	content: '   '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 /* hover */
-label.texts.hover,
-label.texts.hover:before,
-label.texts.hover:after {
+label.formwintexts.hover,
+label.formwintexts.hover:before,
+label.formwintexts.hover:after {
 	content: '    '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 /* positive hover */
-label.texts.positive.hover,
-label.texts.positive.hover:before,
-label.texts.positive.hover:after {
+label.formwintexts.positive.hover,
+label.formwintexts.positive.hover:before,
+label.formwintexts.positive.hover:after {
 	content: '     '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 /* negative hover */
-label.texts.negative.hover,
-label.texts.negative.hover:before,
-label.texts.negative.hover:after {
+label.formwintexts.negative.hover,
+label.formwintexts.negative.hover:before,
+label.formwintexts.negative.hover:after {
 	content: '      '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 /* focus */
-label.texts.focus,
-label.texts.focus:before,
-label.texts.focus:after {
+label.formwintexts.focus,
+label.formwintexts.focus:before,
+label.formwintexts.focus:after {
 	content: '       '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 /* positive focus */
-label.texts.positive.focus,
-label.texts.positive.focus:before,
-label.texts.positive.focus:after {
+label.formwintexts.positive.focus,
+label.formwintexts.positive.focus:before,
+label.formwintexts.positive.focus:after {
 	content: '        '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 /* negative focus */
-label.texts.negative.focus,
-label.texts.negative.focus:before,
-label.texts.negative.focus:after {
+label.formwintexts.negative.focus,
+label.formwintexts.negative.focus:before,
+label.formwintexts.negative.focus:after {
 	content: '         '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 /* disabled */
-label.texts.disabled,
-label.texts.disabled:before,
-label.texts.disabled:after {
+label.formwintexts.disabled,
+label.formwintexts.disabled:before,
+label.formwintexts.disabled:after {
 	content: '          '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
 
@@ -184,6 +210,7 @@ div.formwinbutton {
 	display: inline-block;
 	position: relative;
 }
+
 div.formwinbutton:before {
 	display: inline-block;
 	position: absolute;
@@ -193,6 +220,7 @@ div.formwinbutton:before {
 	padding: 0;
 	content: '';
 }
+
 div.formwinbutton input {
 	display: inline-block;
 	position: relative;
@@ -205,13 +233,16 @@ div.formwinbutton input {
 	outline: none;
 	background: none;
 }
+
 div.formwinbutton.focus:before,
 div.formwinbutton.hover:before {
 	content: ' '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 div.formwinbutton.active:before {
 	content: '  '; /* forces redraw in IE8 (this must be different from every other definition) */
 }
+
 div.formwinbutton.positive:before {
 	content: '   '; /* forces redraw in IE8 (this must be different from every other definition) */
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Sending JS to closure-compiler.appspot.com"
+echo "... sending js/jquery.formwin.js to closure-compiler.appspot.com to generate js/jquery.formwin.min.js"
 curl \
 	--data-urlencode js_code@js/jquery.formwin.js \
 	--data output_info=compiled_code \

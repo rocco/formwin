@@ -5,7 +5,7 @@
 	<title>Formwin - form styles for IE8+</title>
 	
 	<!-- jQuery is needed -->
-	<script src="jquery-1.8.2.js"></script>
+	<script src="js/jquery-1.8.2.js"></script>
 	
 	<!-- Formwin includes, feel free to combine/compress/minify those -->
 	<link rel="stylesheet" type="text/css" href="../css/formwin-base.css">
@@ -14,22 +14,19 @@
 	<script src="../js/jquery.formwin.js"></script>
 	
 	<!-- demo page specific includes -->
-	<link rel="stylesheet" type="text/css" href="demo.css">
+	<link rel="stylesheet" type="text/css" href="css/demo.css">
 	
 	<!-- Formwin JS part -->
 	<script>
 		$(document).ready(function(){
-			// apply formwin to all form elements (formWinClassSel: '')
+			// apply formwin to all form elements (formWinClassSel: 'label')
 			// applying to only those with class="formwin" would look like this: formWinClassSel: '.formwin' (including the dot)
 			$.formwin.init({
-				formWinClassSel: '',
 				placeholderColor: '#999'
 			});
 
 			// fix label sizes on all form elements
-			$.formwin.fixlabels({
-				formWinClassSel: ''
-			});
+			$.formwin.fixlabels();
 		});
 	</script>
 
@@ -38,8 +35,8 @@
 	<h1>Formwin - form styles for IE8+</h1>
 	
 	<div class="info">
-		The following form elements showcase Formwined form elements. 
-		The dashed lines around form elements are intentionally there and set in demo.css to show you the actual form element boundaries.
+		The following form elements showcase Formwon form elements ;)
+		The dashed lines around form elements are intentionally there (set in demo.css) to show you the actual form element boundaries including their labels.
 	</div>
 	
 	<form action="#">
@@ -48,7 +45,7 @@
 		textarea without label and and with placeholder-attribute:<br>
 		<br>
 		<div class="borderdiv">
-			<label for="textarea_plain" class="texts">
+			<label for="textarea_plain" class="formwintexts">
 				<textarea cols="40" rows="5" id="textarea_plain" placeholder="placeholder text"></textarea>
 			</label>
 		</div>
@@ -56,7 +53,7 @@
 		textarea with label above, some text contained, inline css to set size:<br>
 		<br>
 		<div class="borderdiv">
-			<label for="textarea_above" class="texts above">
+			<label for="textarea_above" class="formwintexts above">
 				<span>Textarea Label (above)</span>
 				<textarea cols="40" rows="5" id="textarea_above" style="width: 400px; height: 150px;">long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text</textarea>
 			</label>
@@ -65,7 +62,7 @@
 		textarea with label to the right and in 'positive' state:<br>
 		<br>
 		<div class="borderdiv">
-			<label for="textarea_right" class="texts right positive">
+			<label for="textarea_right" class="formwintexts right positive">
 				<span>Textarea Label (right)</span>
 				<textarea cols="40" rows="5" id="textarea_right">textarea text</textarea>
 			</label>
@@ -74,7 +71,7 @@
 		textarea with label below and in 'negative' state:<br>
 		<br>
 		<div class="borderdiv">
-			<label for="textarea_below" class="texts below negative">
+			<label for="textarea_below" class="formwintexts below negative">
 				<span>Textarea Label (below)</span>
 				<textarea cols="40" rows="5" id="textarea_below">textarea text</textarea>
 			</label>
@@ -83,7 +80,7 @@
 		disabled textarea with label to the left:<br>
 		<br>
 		<div class="borderdiv">
-			<label for="textarea_left" class="texts left disabled">
+			<label for="textarea_left" class="formwintexts left disabled">
 				<span>Textarea Label (left)</span>
 				<textarea cols="40" rows="5" id="textarea_left" disabled="disabled">textarea text</textarea>
 			</label>
@@ -94,15 +91,15 @@
 		input[type=text] without label and and with placeholder-attribute:<br>
 		<br>
 		<div class="borderdiv">
-			<label for="input_plain" class="texts">
-				<input type="text" id="textarea_left" name="textarea_left" placeholder="placeholder text" value="">
+			<label for="input_plain" class="formwintexts">
+				<input type="text" id="input_plain" name="input_plain" placeholder="placeholder text" value="">
 			</label>
 		</div>
 
 		input[type=text] with label above and some text contained:<br>
 		<br>
 		<div class="borderdiv">
-			<label for="input_above" class="texts above">
+			<label for="input_above" class="formwintexts above">
 				<span>Input Label (above)</span>
 				<input type="text" id="input_above" name="input_above" value="input text appears here, yep that's right nowhere else">
 			</label>
@@ -111,7 +108,7 @@
 		input[type=text] with label to the right and in 'positive' state:<br>
 		<br>
 		<div class="borderdiv">
-			<label for="input_right" class="texts right positive">
+			<label for="input_right" class="formwintexts right positive">
 				<span>Input Label (right)</span>
 				<input type="text" id="input_right" name="input_right" value="input text">
 			</label>
@@ -120,7 +117,7 @@
 		input[type=text] with label below and in 'negative' state:<br>
 		<br>
 		<div class="borderdiv">
-			<label for="input_below" class="texts below negative">
+			<label for="input_below" class="formwintexts below negative">
 				<span>Input Label (below)</span>
 				<input type="text" id="input_below" name="input_below" value="input text">
 			</label>
@@ -129,7 +126,7 @@
 		disabled input[type=text] with label to the left:<br>
 		<br>
 		<div class="borderdiv">
-			<label for="input_left" class="texts left disabled">
+			<label for="input_left" class="formwintexts left disabled">
 				<span>Input Label (left)</span>
 				<input type="text" id="input_left" name="input_left" value="input text" disabled="disabled">
 			</label>
@@ -257,6 +254,7 @@
 			</label>
 		</div>
 
+
 		<!-- radios -->
 		radios without labels and nothing selected:<br>
 		<br>
@@ -316,7 +314,6 @@
 				<input type="radio" name="radio_right" id="radio_right_3" value="radio_right_3">
 			</label>
 		</div>
-		
 
 		radios with labels below, 2nd one disabled:<br>
 		<br>
@@ -338,7 +335,6 @@
 			</label>
 		</div>
 
-		
 		radios with labels to the left, all disabled, 3rd one selected, line breaks added:<br>
 		<br>
 		<div class="borderdiv">
@@ -422,7 +418,6 @@
 				<input type="submit" id="submit_disabled" value="Disabled Submit Button" disabled="disabled">
 			</div>
 		</div>
-
 
 		<div class="borderdiv">
 			<button id="buttontag0">

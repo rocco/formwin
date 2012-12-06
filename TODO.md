@@ -1,6 +1,7 @@
-#ToDos
+# ToDos
 
-- unit tests (cf. flexie)
+- complete unit tests
+- performance tests
 - cross/check icons on positive/negative inputs
 - style file upload input
 - active state is set when only clicking the label (selects)

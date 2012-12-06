@@ -1,15 +1,17 @@
 /*
-this contains all variable values except sprite image values (positions, margins etc.) 
-*/
+ * this contains all variable values except sprite image values (fonts, colors, label margins etc.) 
+ */
 
 /* label */
 label {
 	-webkit-font-smoothing: antialiased;
 }
+
 /* label position "above" */
 label.above {
 	margin-top: 20px;                /* label height */
 }
+
 label.above span {
 	top: -20px;                      /* negative label height */
 }
@@ -18,6 +20,7 @@ label.above span {
 label.right {
 	margin-right: 150px;             /* max margin next to input (behind label) */
 }
+
 label.right span {
 	right: -150px;                   /* negative (label width + margin left to input) */
 }
@@ -26,6 +29,7 @@ label.right span {
 label.below {
 	margin-bottom: 20px;
 }
+
 label.below span {
 	bottom: -20px;                   /* negative (label height + margin bottom to input) */
 }
@@ -34,6 +38,7 @@ label.below span {
 label.left {
 	margin-left: 150px;              /* default label width */
 }
+
 label.left span {
 	left: -150px;                    /* negative label width */
 }
@@ -42,8 +47,8 @@ label.left span {
 label span, 
 /* input element fonts */
 label div.selectedvalue,
-label.texts textarea,
-label.texts input[type=text],
+label.formwintexts textarea,
+label.formwintexts input[type=text],
 div.formwinbutton input {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 12px;
@@ -54,8 +59,8 @@ div.formwinbutton input {
 }
 
 /* disabled fonts */
-label.texts.disabled textarea,
-label.texts.disabled input,
+label.formwintexts.disabled textarea,
+label.formwintexts.disabled input,
 label.disabled div.selectedvalue {
 	color: #999;
 }
@@ -77,24 +82,31 @@ label div.selectedvalue {
 div.formwinbutton input {
 	color: #333;
 }
+
 div.formwinbutton.disabled input {
 	color: #ccc;
 }
+
 div.formwinbutton.positive input {
 	color: green;
 }
+
 div.formwinbutton.positive.disabled input {
 	color: #9c9;
 }
+
 div.formwinbutton.negative input {
 	color: red;
 }
+
 div.formwinbutton.negative.disabled input {
 	color: #c99;
 }
+
 div.formwinbutton.custom1 input {
 	color: #9f2890;
 }
+
 div.formwinbutton.custom1.disabled input {
 	color: #bf58c0;
 }

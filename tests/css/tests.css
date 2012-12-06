@@ -1,0 +1,10 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+#qunit-testresults {
+	position: absolute;
+	left: 50px;
+	top: 50px;
+	width: 90%;
+}
