@@ -1,0 +1,15 @@
+/* info container */
+div.info {
+	border: 1px dashed blue;
+	background: lightblue;
+	padding: 20px;
+	margin: 20px 0;
+}
+
+/* borders around form elements */
+div.borderdiv {
+	border: 1px lightgrey dashed; 
+	display: table;
+	margin-bottom: 20px;
+	padding: 0;
+}

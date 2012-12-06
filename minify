@@ -1,10 +1,9 @@
 #!/bin/bash
 
-echo "Sending JS to appspot.com"
+echo "Sending JS to closure-compiler.appspot.com"
 curl \
-	-s \
-	--data-urlencode js_code@jquery.uniform.js \
+	--data-urlencode js_code@js/jquery.formwin.js \
 	--data output_info=compiled_code \
 	--data output_format=text \
 	--data compilation_level=SIMPLE_OPTIMIZATIONS \
-	http://closure-compiler.appspot.com/compile > jquery.uniform.min.js
+	http://closure-compiler.appspot.com/compile > js/jquery.formwin.min.js

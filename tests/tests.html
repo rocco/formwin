@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Formwin - Form element styles for IE8+</title>
+
+
+	<link rel="stylesheet" type="text/css" href="formwin.css">
+	<link rel="stylesheet" type="text/css" href="formwin-sprite.css">
+	<link rel="stylesheet" type="text/css" href="formwin-theme.css">
+	<link rel="stylesheet" type="text/css" href="site.css">
+
+	<script src="../js/jquery-1.8.2.js"></script>
+	<script src="formwin.js"></script>
+	<script>
+		$(document).ready(function(){
+			// apply formwin to all form elements
+			// apply to only those with class="formwin" would look like this: 
+			// formWinClassSel: '.formwin'
+			$.formwin.init({
+				formWinClassSel: '',
+				placeholderColor: '#999'
+			});
+
+			// fix label sizes
+			$.formwin.fixlabels({
+				formWinClassSel: ''
+			});
+		});
+	</script>
+	
+	
+	<link rel="stylesheet" href="css/qunit.css" type="text/css" media="screen" />
+	<script src="js/qunit.js"></script>
+	<script>
+		Flexie.test = (function() {
+					var prefixes = " -o- -moz- -ms- -webkit- -khtml- ".split(" ");
+				
+					function appendProperty(target, prop, value) {
+						var cssText = [], i, j;
+
+						for (i = 0, j = prefixes.length; i < j; i++) {
+							cssText.push(prop + ":" + prefixes[i] + value);
+						}
+
+						target.style.cssText = cssText.join(";");
+						return target;
+					}
+				
+					return {
+						parseChildren : function (children, flexMatrix, ordinalMatrix) {
+							var matches = [];
+
+							children.each(function (i) {
+								var obj = {
+									selector : "#" + $(this).attr("id"),
+									properties : [],
+									match : this
+								};
+							
+								if (flexMatrix && flexMatrix[i]) {
+									obj.flex = flexMatrix[i];
+									obj.flexSpecificity = 101;
+								}
+							
+								if (ordinalMatrix && ordinalMatrix[i]) {
+									obj["ordinal-group"] = ordinalMatrix[i];
+									obj.ordinalSpecificity = 101;
+								}
+
+								matches.push(obj);
+							});
+
+							matches.childPropertiesApplied = true;
+							return matches;
+						},
+					
+						applyBoxModel : function(params) {
+							var element = params.target,
+							    support = Flexie.flexboxSupported,
+							    _self = this;
+						
+							// Start fresh
+							Flexie.destroyInstance();
+						
+							if (support) {
+								element.style.cssText = "display: -webkit-box; display: -moz-box; display: -o-box; display: -ms-box; display: -khtml-box; display: box;";
+							
+								for (var key in params) {
+									var uc_key = key.charAt(0).toUpperCase() + key.substr(1);
+								
+									if (key === "children") {
+										if (params.children.childPropertiesApplied) {
+											window.setTimeout(function() {
+												for (var i = 0, j = params.children.length; i < j; i++) {
+													var child = params.children[i];
+
+													if (child.flex !== undefined) {
+														_self.applyProp(child.match, "boxFlex", child.flex);
+													}
+
+													if (child["ordinal-group"] !== undefined) {
+														_self.applyProp(child.match, "boxOrdinalGroup", child["ordinal-group"]);
+													}
+												}
+											}, 0);
+										}
+									} else {
+										_self.applyProp(element, "box" + uc_key, params[key]);
+									}
+								}
+							}
+						
+							if (!support || (support && support.partialSupport)) {
+								new Flexie.box(params);
+							}
+						},
+					
+						applyProp : function(element, prop, value) {
+							var uc_prop = prop.charAt(0).toUpperCase() + prop.substr(1),
+
+							props = [
+								prop,
+								'Webkit' + uc_prop,
+								'Moz' + uc_prop,
+								'O' + uc_prop,
+								'ms' + uc_prop,
+								'Khtml' + uc_prop
+							];
+
+							for (var i = 0, j = props.length; i < j; i++) {
+								element.style[props[i]] = value;
+							}
+						},
+					
+						reset : function(element) {
+							element.style.cssText = "";
+						}
+					};
+				}());
+			</script>
+		
+			<script>
+				Flexie.initModules = function () {
+					var THRESHOLD = 3;
+				
+					var withinThreshold = function (DOMOffset, expectedOffset) {
+						var threshold = false;
+					
+						var calculate = function (num, value) {
+							var limit = 0;
+
+							while (limit < THRESHOLD) {
+								if ((num + limit === value) || (num - limit === value)) {
+									threshold = true;
+									break;
+								}
+								limit++;
+							}
+						};
+					
+						if (typeof DOMOffset === "number") {
+							calculate(DOMOffset, expectedOffset);
+						} else {
+							$.each(DOMOffset, function (key, value) {
+								calculate(expectedOffset[key], value);
+							});
+						}
+					
+						return threshold;
+					};
+				
+					var element;
+				
+					module("box-orient: horizontal, box-align: stretch, box-direction: normal");
+						asyncTest("box-pack: start", function () {
+							element = $("#box-wrap-inner");
+							children = element.children();
+					
+							Flexie.test.applyBoxModel({
+								target : element.get(0),
+								children : Flexie.test.parseChildren(children),
+								orient : "horizontal",
+								align : "stretch",
+								pack : "start",
+								direction : "normal"
+							});
+					
+							same(children.eq(0).offset(), {
+								top : 57,
+								left : 29
+							}, "First Child Offset");
+							same(children.eq(0).width(), 44, "First Child Width");
+							same(children.eq(0).height(), 526, "First Child Height");
+					
+							same(children.eq(1).offset(), {
+								top : 56,
+								left : 95
+							}, "Second Child Offset");
+							same(children.eq(1).width(), 53, "Second Child Width");
+							same(children.eq(1).height(), 524, "Second Child Height");
+					
+							same(children.eq(2).offset(), {
+								top : 56,
+								left : 177
+							}, "Third Child Offset");
+							same(children.eq(2).width(), 62, "Third Child Width");
+							same(children.eq(2).height(), 526, "Third Child Height");
+				
+							same(children.eq(3).offset(), {
+								top : 55,
+								left : 265
+							}, "Fourth Child Offset");
+							same(children.eq(3).width(), 71, "Fourth Child Width");
+							same(children.eq(3).height(), 522, "Fourth Child Height");
+						
+							start();
+						});
+						asyncTest("box-pack: end", function () {
+							element = $("#box-wrap-inner");
+							children = element.children();
+					
+							Flexie.test.applyBoxModel({
+								target : element.get(0),
+								children : Flexie.test.parseChildren(children),
+								orient : "horizontal",
+								align : "stretch",
+								pack : "end",
+								direction : "normal"
+							});
+					
+							same(children.eq(0).offset(), {
+								top : 57,
+								left : 238
+							}, "First Child Offset");
+							same(children.eq(0).width(), 44, "First Child Width");
+							same(children.eq(0).height(), 526, "First Child Height");
+					
+							same(children.eq(1).offset(), {
+								top : 56,
+								left : 304
+							}, "Second Child Offset");
+							same(children.eq(1).width(), 53, "Second Child Width");
+							same(children.eq(1).height(), 524, "Second Child Height");
+					
+							same(children.eq(2).offset(), {
+								top : 56,
+								left : 386
+							}, "Third Child Offset");
+							same(children.eq(2).width(), 62, "Third Child Width");
+							same(children.eq(2).height(), 526, "Third Child Height");
+									
+							same(children.eq(3).offset(), {
+								top : 55,
+								left : 474
+							}, "Fourth Child Offset");
+							same(children.eq(3).width(), 71, "Fourth Child Width");
+							same(children.eq(3).height(), 522, "Fourth Child Height");
+						
+							start();
+						});
+						asyncTest("box-pack: center", function () {
+							element = $("#box-wrap-inner");
+							children = element.children();
+					
+							Flexie.test.applyBoxModel({
+								target : element.get(0),
+								children : Flexie.test.parseChildren(children),
+								orient : "horizontal",
+								align : "stretch",
+								pack : "center",
+								direction : "normal"
+							});
+					
+							same(children.eq(0).offset(), {
+								top : 57,
+								left : 133
+							}, "First Child Offset");
+							same(children.eq(0).width(), 44, "First Child Width");
+							same(children.eq(0).height(), 526, "First Child Height");
+					
+							same(children.eq(1).offset(), {
+								top : 56,
+								left : 199
+							}, "Second Child Offset");
+							same(children.eq(1).width(), 53, "Second Child Width");
+							same(children.eq(1).height(), 524, "Second Child Height");
+					
+							same(children.eq(2).offset(), {
+								top : 56,
+								left : 281
+							}, "Third Child Offset");
+							same(children.eq(2).width(), 62, "Third Child Width");
+							same(children.eq(2).height(), 526, "Third Child Height");
+									
+							same(children.eq(3).offset(), {
+								top : 55,
+								left : 369
+							}, "Fourth Child Offset");
+							same(children.eq(3).width(), 71, "Fourth Child Width");
+							same(children.eq(3).height(), 522, "Fourth Child Height");
+						
+							start();
+						});
+						asyncTest("box-pack: justify", function () {
+							element = $("#box-wrap-inner");
+							children = element.children();
+					
+							Flexie.test.applyBoxModel({
+								target : element.get(0),
+								children : Flexie.test.parseChildren(children),
+								orient : "horizontal",
+								align : "stretch",
+								pack : "justify",
+								direction : "normal"
+							});
+						
+							same(true, withinThreshold(children.eq(0).offset(), {
+								top : 57,
+								left : 29
+							}), "First Child Offset");
+							same(children.eq(0).width(), 44, "First Child Width");
+							same(children.eq(0).height(), 526, "First Child Height");
+				
+							same(true, withinThreshold(children.eq(1).offset(), {
+								top : 56,
+								left : 164
+							}), "Second Child Offset");
+							same(children.eq(1).width(), 53, "Second Child Width");
+							same(children.eq(1).height(), 524, "Second Child Height");
+				
+							same(true, withinThreshold(children.eq(2).offset(), {
+								top : 56,
+								left : 316
+							}), "Third Child Offset");
+							same(children.eq(2).width(), 62, "Third Child Width");
+							same(children.eq(2).height(), 526, "Third Child Height");
+				
+							same(true, withinThreshold(children.eq(3).offset(), {
+								top : 55,
+								left : 474
+							}), "Fourth Child Offset");
+							same(children.eq(3).width(), 71, "Fourth Child Width");
+							same(children.eq(3).height(), 522, "Fourth Child Height");
+					
+							start();
+						});
+						asyncTest("box-flex [1, 0, 0, 0]", function () {
+							element = $("#box-wrap-inner");
+							children = element.children();
+					
+							Flexie.test.applyBoxModel({
+								target : element.get(0),
+								children : Flexie.test.parseChildren(children, [1, 0, 0, 0]),
+								orient : "horizontal",
+								align : "stretch",
+								direction : "normal"
+							});
+						
+							window.setTimeout(function() {
+								same(true, withinThreshold(children.eq(0).offset(), {
+									top : 57,
+									left : 29
+								}), "First Child Offset");
+								same(true, withinThreshold(children.eq(0).width(), 253), "First Child Width");
+								same(children.eq(0).height(), 526, "First Child Height");
+
+								same(true, withinThreshold(children.eq(1).offset(), {
+									top : 56,
+									left : 304
+								}), "Second Child Offset");
+								same(true, withinThreshold(children.eq(1).width(), 53), "Second Child Width");
+								same(children.eq(1).height(), 524, "Second Child Height");
+
+								same(true, withinThreshold(children.eq(2).offset(), {
+									top : 56,
+									left : 386
+								}), "Third Child Offset");
+								same(true, withinThreshold(children.eq(2).width(), 62), "Third Child Width");
+								same(children.eq(2).height(), 526, "Third Child Height");
+
+								same(true, withinThreshold(children.eq(3).offset(), {
+									top : 55,
+									left : 474
+								}), "Fourth Child Offset");
+								same(true, withinThreshold(children.eq(3).width(), 71), "Fourth Child Width");
+								same(children.eq(3).height(), 522, "Fourth Child Height");
+
+								start();
+							}, 0);
+						});
+						asyncTest("box-flex [1, 2, 0, 0]", function () {
+							element = $("#box-wrap-inner");
+							children = element.children();
+					
+							Flexie.test.applyBoxModel({
+								target : element.get(0),
+								children : Flexie.test.parseChildren(children, [1, 2, 0, 0]),
+								orient : "horizontal",
+								align : "stretch",
+								direction : "normal"
+							});
+						
+							window.setTimeout(function() {
+								same(true, withinThreshold(children.eq(0).offset(), {
+									top : 57,
+									left : 29
+								}), "First Child Offset");
+								same(true, withinThreshold(children.eq(0).width(), 113), "First Child Width");
+								same(children.eq(0).height(), 526, "First Child Height");
+				
+								same(true, withinThreshold(children.eq(1).offset(), {
+									top : 56,
+									left : 164
+								}), "Second Child Offset");
+								same(true, withinThreshold(children.eq(1).width(), 193), "Second Child Width");
+								same(children.eq(1).height(), 524, "Second Child Height");
+				
+								same(true, withinThreshold(children.eq(2).offset(), {
+									top : 56,
+									left : 386
+								}), "Third Child Offset");
+								same(true, withinThreshold(children.eq(2).width(), 62), "Third Child Width");
+								same(children.eq(2).height(), 526, "Third Child Height");
+				
+								same(true, withinThreshold(children.eq(3).offset(), {
+									top : 55,
+									left : 474
+								}), "Fourth Child Offset");
+								same(true, withinThreshold(children.eq(3).width(), 71), "Fourth Child Width");
+								same(children.eq(3).height(), 522, "Fourth Child Height");
+				
+								start();
+							}, 0);
+						});
+						asyncTest("box-flex [1, 2, 3, 0]", function () {
+							element = $("#box-wrap-inner");
+							children = element.children();
+					
+							Flexie.test.applyBoxModel({
+								target : element.get(0),
+								children : Flexie.test.parseChildren(children, [1, 2, 3, 0]),
+								orient : "horizontal",
+								align : "stretch",
+								direction : "normal"
+							});
+						
+							window.setTimeout(function() {
+								same(true, withinThreshold(children.eq(0).offset(), {
+									top : 57,
+									left : 29
+								}), "First Child Offset");
+								same(true, withinThreshold(children.eq(0).width(), 78), "First Child Width");
+								same(children.eq(0).height(), 526, "First Child Height");
+				
+								same(true, withinThreshold(children.eq(1).offset(), {
+									top : 56,
+									left : 129
+								}), "Second Child Offset");
+								same(true, withinThreshold(children.eq(1).width(), 123), "Second Child Width");
+								same(children.eq(1).height(), 524, "Second Child Height");
+				
+								same(true, withinThreshold(children.eq(2).offset(), {
+									top : 56,
+									left : 281
+								}), "Third Child Offset");
+								same(true, withinThreshold(children.eq(2).width(), 167), "Third Child Width");
+								same(children.eq(2).height(), 526, "Third Child Height");
+				
+								same(true, withinThreshold(children.eq(3).offset(), {
+									top : 55,
+									left : 474
+								}), "Fourth Child Offset");
+								same(true, withinThreshold(children.eq(3).width(), 71), "Fourth Child Width");
+								same(children.eq(3).height(), 522, "Fourth Child Height");
+				
+								start();
+							}, 0);
+						});
+						asyncTest("box-flex [1, 2, 3, 4]", function () {
+							element = $("#box-wrap-inner");
+							children = element.children();
+					
+							Flexie.test.applyBoxModel({
+								target : element.get(0),
+								children : Flexie.test.parseChildren(children, [1, 2, 3, 4]),
+								orient : "horizontal",
+								align : "stretch",
+								direction : "normal"
+							});
+						
+							window.setTimeout(function() {
+								same(true, withinThreshold(children.eq(0).offset(), {
+									top : 57,
+									left : 29
+								}), "First Child Offset");
+								same(true, withinThreshold(children.eq(0).width(), 64), "First Child Width");
+								same(children.eq(0).height(), 526, "First Child Height");
+				
+								same(true, withinThreshold(children.eq(1).offset(), {
+									top : 56,
+									left : 115
+								}), "Second Child Offset");
+								same(true, withinThreshold(children.eq(1).width(), 95), "Second Child Width");
+								same(children.eq(1).height(), 524, "Second Child Height");
+				
+								same(true, withinThreshold(children.eq(2).offset(), {
+									top : 56,
+									left : 239
+								}), "Third Child Offset");
+								same(true, withinThreshold(children.eq(2).width(), 125), "Third Child Width");
+								same(children.eq(2).height(), 526, "Third Child Height");
+				
+								same(true, withinThreshold(children.eq(3).offset(), {
+									top : 55,
+									left : 390
+								}), "Fourth Child Offset");
+								same(true, withinThreshold(children.eq(3).width(), 155), "Fourth Child Width");
+								same(children.eq(3).height(), 522, "Fourth Child Height");
+				
+								start();
+							}, 0);
+						});
+				
+					module("box-orient: vertical, box-align: stretch, box-direction: normal");
+						asyncTest("box-pack:
+
+</head>
+<body>
+	<h1>Formwin - Form element styles for IE8+</h1>
+	by <a href="http://www.pavingways.com">Rocco @ PavingWays</a><br>
+	<ul>
+		<li>works on &lt;textarea&gt; and &lt;input type="text"&gt; also in IE8</li>
+		<li>semantically correct HTML: a label wraps a textarea/input</li>
+		<li>no markup added</li>
+		<li>minimal JavaScript to set focus class</li>
+		<li>one sprited background image per state (all on one sprite was impossible): 
+			<a target="_blank" href="input-normal.png">1</a>
+			<a target="_blank" href="input-focus.png">2</a>
+			<a target="_blank" href="input-disabled.png">3</a>
+			<a target="_blank" href="input-positive.png">4</a>
+			<a target="_blank" href="input-negative.png">5</a>
+		</li>
+		<li>4 default label positions: above, right, below and left</li>
+		<li>input size flexible, also "live" in browser (Chrome, Safari, FF)</li>
+	</ul>
+	<form action="#">
+
+<!-- select -->
+		select without label and 2nd option "One" selected:<br>
+		<br>
+		<div class="borderdiv">
+			<label for="select0">
+				<div class="selectedvalue"><!-- optionally fill in selected option's text here --></div>
+				<select id="select0">
+					<option value="0">Zero</option>
+					<option value="1" selected="selected">One</option>
+					<option value="2">Two</option>
+				</select>
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="select0_1"><!-- optionally fill class="disabled" for disabled form elements - speeds up display of disabled state -->
+				<div class="selectedvalue"><!-- optionally fill in selected option's text here --></div>
+				<select id="select0_1" disabled="disabled">
+					<option value="0">Zero</option>
+					<option value="1">One</option>
+					<option value="2" selected="selected">Two</option>
+				</select>
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="select1" class="above">
+				<span>Select Label (above)</span>
+				<div class="selectedvalue">Zero (v)</div>
+				<select id="select1">
+					<option value="0">Zero</option>
+					<option value="1">One</option>
+					<option value="2">Two</option>
+				</select>
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="select2" class="right">
+				<span>Select Label (right)</span>
+				<div class="selectedvalue">Zero (v)</div>
+				<select id="select2">
+					<option value="0">Zero</option>
+					<option value="1">One</option>
+					<option value="2">Two</option>
+				</select>
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="select3" class="below">
+				<span>Select Label (below)</span>
+				<div class="selectedvalue">Zero (v)</div>
+				<select id="select3">
+					<option value="0">Zero</option>
+					<option value="1">One</option>
+					<option value="2">Two</option>
+				</select>
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="select4" class="left">
+				<span>Select Label (left)</span>
+				<div class="selectedvalue">Zero (v)</div>
+				<select id="select4">
+					<option value="0">Zero</option>
+					<option value="1">One</option>
+					<option value="2">Two</option>
+				</select>
+			</label>
+		</div>
+
+<!-- textarea -->
+		textarea without label and placeholder-attribute text:<br>
+		<br>
+		<div class="borderdiv">
+			<label for="textarea0" class="texts">
+				<textarea cols="100" rows="5" id="textarea0" placeholder="Placeholder Text" style="width: 300px; height: 100px;"></textarea>
+			</label>
+		</div>
+		
+		<div class="borderdiv">
+			<label for="textarea1" class="texts above">
+				<span>Textarea Label (above)</span>
+				<textarea cols="40" rows="5" id="textarea1">long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text</textarea>
+			</label>
+		</div>
+		
+		<div class="borderdiv">
+			<label for="textarea2" class="texts right positive">
+				<span>Textarea Label (right)</span>
+				<textarea cols="40" rows="5" id="textarea2">textarea text</textarea>
+			</label>
+		</div>
+		
+		<div class="borderdiv">
+			<label for="textarea3" class="texts below negative">
+				<span>Textarea Label (below)</span>
+				<textarea cols="40" rows="5" id="textarea3">textarea text</textarea>
+			</label>
+		</div>
+		
+		<div class="borderdiv">
+			<label for="textarea4" class="texts left disabled">
+				<span>Textarea Label (left)</span>
+				<textarea cols="40" rows="5" id="textarea4" disabled="disabled">textarea text</textarea>
+			</label>
+		</div>
+
+<!-- text input -->
+		input without label and placeholder-attribute text:<br>
+		<br>
+		<div class="borderdiv">
+			<label for="input0" class="texts">
+				<input type="text" id="input0" value="" placeholder="Placeholder Text">
+			</label>
+		</div>
+		
+		<div class="borderdiv">
+			<label for="input1" class="texts above">
+				<span>Input Label (above)</span>
+				<input type="text" id="input1" value="input text">
+			</label>
+		</div>
+		
+		<div class="borderdiv">
+			<label for="input2" class="texts right positive">
+				<span>Input Label (right)</span>
+				<input type="text" id="input2" value="long input text long input text long input text long input text long input text">
+			</label>
+		</div>
+		
+		<div class="borderdiv">
+			<label for="input3" class="texts below negative">
+				<span>Input Label (below)</span>
+				<input type="text" id="input3" value="input text">
+			</label>
+		</div>
+		
+		<div class="borderdiv">
+			<label for="input4" class="texts left disabled">
+				<span>Input Label (left)</span>
+				<input type="text" id="input4" value="input text" disabled="disabled">
+			</label>
+		</div>
+
+<!-- checkbox -->
+		a checkbox without label:<br>
+		<br>
+		<div class="borderdiv">
+			<label for="check0">
+				<div class="checkedvalue"></div>
+				<input type="checkbox" id="check0" value="check0">
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="check0_1">
+				<div class="checkedvalue"></div>
+				<input type="checkbox" id="check0_1" value="check0_1" disabled="disabled">
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="check0_2">
+				<div class="checkedvalue"></div>
+				<input type="checkbox" id="check0_2" value="check0_2">
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="check1" class="above checked">
+				<span>Checkbox Label (above and checked)</span>
+				<div class="checkedvalue"></div>
+				<input type="checkbox" id="check1" value="check1" checked="checked">
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="check2" class="right disabled">
+				<span>Checkbox Label (right and disabled)</span>
+				<div class="checkedvalue"></div>
+				<input type="checkbox" id="check2" value="check2" disabled="disabled">
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="check3" class="below">
+				<span>Checkbox Label (below)</span>
+				<div class="checkedvalue"></div>
+				<input type="checkbox" id="check3" value="check3">
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="check4" class="left">
+				<span>Checkbox Label (left)</span>
+				<div class="checkedvalue"></div>
+				<input type="checkbox" id="check4" value="check4">
+			</label>
+		</div>
+
+<!-- radios -->
+		radios without labels:<br>
+		<br>
+		<div class="borderdiv">
+			<label for="radio0_1">
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio0" id="radio0_1" value="radio0_1">
+			</label>
+			<label for="radio0_2">
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio0" id="radio0_2" value="radio0_2">
+			</label>
+			<label for="radio0_3">
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio0" id="radio0_3" value="radio0_3">
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="radio1_1" class="above">
+				<span>Radio Label (above)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio1" id="radio1_1" value="radio1_1">
+			</label>
+			<label for="radio1_2" class="above checked">
+				<span>Radio Label (above and checked)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio1" id="radio1_2" value="radio1_2" checked="checked">
+			</label>
+			<label for="radio1_3" class="above">
+				<span>Radio Label (above)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio1" id="radio1_3" value="radio1_3">
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="radio2_1" class="right">
+				<span>Radio Label (right)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio2" id="radio2_1" value="radio2_1">
+			</label>
+			<label for="radio2_2" class="right disabled">
+				<span>Radio Label (right and disabled)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio2" id="radio2_2" value="radio2_2" disabled="disabled">
+			</label>
+			<label for="radio2_3" class="right">
+				<span>Radio Label (right)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio2" id="radio2_3" value="radio2_3">
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="radio3_1" class="below">
+				<span>Radio Label (below)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio3" id="radio3_1" value="radio3_1">
+			</label>
+			<label for="radio3_2" class="below">
+				<span>Radio Label (below)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio3" id="radio3_2" value="radio3_2">
+			</label>
+			<label for="radio3_3" class="below">
+				<span>Radio Label (below)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio3" id="radio3_3" value="radio3_3">
+			</label>
+		</div>
+
+		<div class="borderdiv">
+			<label for="radio4_1" class="left">
+				<span>Radio Label (left)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio4" id="radio4_1" value="radio4_1">
+			</label>
+			<label for="radio4_2" class="left">
+				<span>Radio Label (left)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio4" id="radio4_2" value="radio4_2">
+			</label>
+			<label for="radio4_3" class="left">
+				<span>Radio Label (left)</span>
+				<div class="radiovalue"></div>
+				<input type="radio" name="radio4" id="radio4_3" value="radio4_3">
+			</label>
+		</div>
+
+<!-- buttons -->
+		<div class="borderdiv">
+			<div class="formwinbutton">
+				<input type="button" id="button0_0" value="Simple Input Button">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="formwinbutton positive">
+				<input type="button" id="button0_p" value="Positive Input Button">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="formwinbutton negative">
+				<input type="button" id="button0_n" value="Negative Input Button">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="formwinbutton custom1">
+				<input type="button" id="button0_c1" value="Custom Input Button">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="formwinbutton">
+				<input type="submit" id="sumit0" value="Disabled Submit Button" disabled="disabled">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="formwinbutton focus">
+				<input type="button" id="button0_1" value="Focused Button Grey">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="button">
+				<input type="button" id="button0_2" value="Button Grey Disabled">
+			</div>
+		</div>
+
+
+		<div class="borderdiv">
+			<div class="button">
+				<input type="button" id="button1_0" value="Button Magenta Available">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="button">
+				<input type="button" id="button1_1" value="Button Magenta Focus">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="button">
+				<input type="button" id="button1_2" value="Button Magenta Disabled">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="button">
+				<input type="button" id="button2_0" value="Button Green Available">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="button">
+				<input type="button" id="button2_1" value="Button Green Focus">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="button">
+				<input type="button" id="button2_2" value="Button Green Disabled">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="button">
+				<input type="button" id="button3_0" value="Button Red Available">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="button">
+				<input type="button" id="button3_1" value="Button Red Focus">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<div class="button">
+				<input type="button" id="button3_2" value="Button Red Disabled">
+			</div>
+		</div>
+
+		<div class="borderdiv">
+			<button id="buttontag0">
+				Button Tag<br>
+				Hello Click Me!
+			</button>
+		</div>
+
+	</form>
+</body>
+</html>

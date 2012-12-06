@@ -1,0 +1,468 @@
+/*
+this contains all sprite image values (positions, margins etc.) 
+change your sprite image and change size values here
+*/
+
+/* 
+------------------------------
+select elements
+------------------------------
+*/
+
+/* value div on selects */
+label div.selectedvalue:before {
+	width: 10px;
+	margin-left: -10px;
+	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat -483px -130px;       /* left corners */
+}
+label:active div.selectedvalue:before, 
+label.active div.selectedvalue:before {
+	background-position: -483px -156px;
+}
+label:active div.selectedvalue, 
+label.active div.selectedvalue {
+	background-position: right -26px;
+}
+label.focus div.selectedvalue:before, 
+label.hover div.selectedvalue:before, 
+label:hover div.selectedvalue:before {
+	background-position: -483px -182px;
+}
+label.focus div.selectedvalue, 
+label.hover div.selectedvalue, 
+label:hover div.selectedvalue {
+	background-position: right -52px;
+}
+label.focus:active div.selectedvalue:before,
+label.focus.active div.selectedvalue:before,
+label:hover:active div.selectedvalue:before,
+label.active:hover div.selectedvalue:before {
+	background-position: -483px -208px;
+}
+label.focus:active div.selectedvalue,
+label.focus.active div.selectedvalue,
+label:hover:active div.selectedvalue,
+label.active:hover div.selectedvalue {
+	background-position: right -78px;
+}
+label.disabled div.selectedvalue:before,
+label.disabled.active div.selectedvalue:before,
+label.disabled:active div.selectedvalue:before {
+	background-position: -483px -234px;
+}
+label.disabled div.selectedvalue,
+label.disabled.active div.selectedvalue,
+label.disabled:active div.selectedvalue {
+	background-position: right -104px;
+}
+label div.selectedvalue {
+	height: 26px;
+	margin-left: 10px;
+	padding-right: 26px;
+	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat right 0px;       /* right corners */
+}
+label.focus div.selectedvalue:before,
+label.hover div.selectedvalue:before {
+	background-position: -483px -182px;
+}
+label.active div.selectedvalue:before {
+	background-position: -483px -208px;
+}
+label.focus div.selectedvalue,
+label.hover div.selectedvalue {
+	background-position: right -52px;
+}
+label.active div.selectedvalue {
+	background-position: right -78px;
+}
+
+
+/* 
+------------------------------
+checkboxes
+------------------------------
+*/
+
+/* value div on checkboxes */
+label div.checkedvalue {
+	height: 19px;
+	width: 19px;
+	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat 0px -260px;       /* right corners */
+}
+/* unchecked states */
+label:active div.checkedvalue,
+label.active div.checkedvalue {
+	background-position: -19px -260px;
+}
+label.focus div.checkedvalue,
+label:hover div.checkedvalue {
+	background-position: -38px -260px;
+}
+label.focus:active div.checkedvalue,
+label:active:hover div.checkedvalue,
+label.active:hover div.checkedvalue,
+label.focus.active div.checkedvalue {
+	background-position: -57px -260px;
+}
+label.disabled div.checkedvalue,
+label.disabled:active div.checkedvalue,
+label.disabled.active div.checkedvalue {
+	background-position: -152px -260px;
+}
+/* checked state */
+label.checked div.checkedvalue {
+	background-position: -76px -260px;
+}
+label.checked:active div.checkedvalue, 
+label.checked.active div.checkedvalue {
+	background-position: -95px -260px;
+}
+label.checked.focus div.checkedvalue,
+label.checked:hover div.checkedvalue {
+	background-position: -114px -260px;
+}
+label.checked.focus:active div.checkedvalue,
+label.checked:hover:active div.checkedvalue,
+label.checked.active:hover div.checkedvalue,
+label.checked.active.focus div.checkedvalue {
+	background-position: -133px -260px;
+}
+label.checked.disabled div.checkedvalue,
+label.checked.disabled:active div.checkedvalue,
+label.checked.disabled.active div.checkedvalue {
+	background-position: -171px -260px;
+}
+
+
+/* 
+------------------------------
+radios 
+------------------------------
+*/
+
+/* value div on radios */
+label div.radiovalue {
+	height: 18px;
+	width: 18px;
+	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat 0px -279px;       /* right corners */
+}
+/* unchecked states */
+label:active div.radiovalue,
+label.active div.radiovalue {
+	background-position: -18px -279px;
+}
+
+label.focus div.radiovalue, 
+label:hover div.radiovalue {
+	background-position: -36px -279px;
+}
+
+label.focus:active div.radiovalue,
+label:active:hover div.radiovalue,
+label.active:hover div.radiovalue,
+label.active.focus div.radiovalue {
+	background-position: -54px -279px;
+}
+
+label.checked div.radiovalue {
+	background-position: -72px -279px;
+}
+
+label.checked:active div.radiovalue,
+label.checked.active div.radiovalue {
+	background-position: -90px -279px;
+}
+
+label.checked.focus div.radiovalue, 
+label.checked:hover div.radiovalue {
+	background-position: -108px -279px;
+}
+
+label.focus.checked:active div.radiovalue, 
+label:hover.checked:active div.radiovalue,
+label.focus.checked.active div.radiovalue,
+label.active.checked:hover div.radiovalue {
+	background-position: -126px -279px;
+}
+
+label.disabled div.radiovalue,
+label.disabled:active div.radiovalue,
+label.disabled.active div.radiovalue {
+	background-position: -144px -279px;
+}
+
+label.disabled.checked div.radiovalue,
+label.disabled.checked:active div.radiovalue,
+label.disabled.checked.active div.radiovalue {
+	background-position: -162px -279px;
+}
+
+/* 
+------------------------------
+textareas and input[type=text] 
+------------------------------
+*/
+/* text inputs use bg images on the label */
+label.texts {
+	background: transparent url('../img/formwin-input-normal.png') scroll no-repeat -7px bottom;   /* negative corner width */
+}
+
+/* :before is a horizontal container with top-left corner and top border */
+label.texts:before {
+	height: 7px;                     /* corner height */
+	/* left-top corner and top border */
+	background: transparent url('../img/formwin-input-normal.png') scroll no-repeat -7px top;   /* negative corner width */
+}
+/* :after is a vertical bar to the right of the input and contains right border and bottom-right corner */
+label.texts:after {
+	width: 7px;                      /* corner width */
+	content: url('../img/formwin-input-normal.png'); /* top-right corner image */
+	/* right border and bottom-right corner */
+	background: transparent url('../img/formwin-input-normal.png') scroll no-repeat -593px bottom;  /* negative (image width - corner width) */
+}
+label.texts textarea,
+label.texts input[type=text] {
+	margin: 12px;                     /* corner width + default "padding" between label and input element */
+}
+
+/* positive */
+label.texts.positive,
+label.texts.positive:before,
+label.texts.positive:after {
+	background-image: url('../img/formwin-input-positive.png');
+}
+label.texts.positive:after {
+	content: url('../img/formwin-input-positive.png');
+}
+
+/* negative */
+label.texts.negative,
+label.texts.negative:before,
+label.texts.negative:after {
+	background-image: url('../img/formwin-input-negative.png');
+}
+label.texts.negative:after {
+	content: url('../img/formwin-input-negative.png');
+}
+
+/* active */
+label.texts.active,
+label.texts.active:before,
+label.texts.active:after {
+	background-image: url('../img/formwin-input-active.png');
+}
+label.texts.active:after {
+	content: url('../img/formwin-input-active.png');
+}
+
+/* hover */
+label.texts:hover,
+label.texts.hover,
+label.texts:hover:before,
+label.texts.hover:before,
+label.texts:hover:after,
+label.texts.hover:after {
+	background-image: url('../img/formwin-input-hover.png');
+}
+label.texts:hover:after,
+label.texts.hover:after {
+	content: url('../img/formwin-input-hover.png');
+}
+
+/* positive hover */
+label.texts.positive:hover,
+label.texts.positive.hover,
+label.texts.positive:hover:before,
+label.texts.positive.hover:before,
+label.texts.positive:hover:after,
+label.texts.positive.hover:after {
+	background-image: url('../img/formwin-input-positive-hover.png');
+}
+label.texts.positive:hover:after,
+label.texts.positive.hover:after {
+	content: url('../img/formwin-input-positive-hover.png');
+}
+
+/* negative hover */
+label.texts.negative:hover,
+label.texts.negative.hover,
+label.texts.negative:hover:before,
+label.texts.negative.hover:before,
+label.texts.negative:hover:after,
+label.texts.negative.hover:after {
+	background-image: url('../img/formwin-input-negative-hover.png');
+}
+label.texts.negative:hover:after,
+label.texts.negative.hover:after {
+	content: url('../img/formwin-input-negative-hover.png');
+}
+
+/* focus */
+label.texts.focus,
+label.texts.focus:before,
+label.texts.focus:after {
+	background-image: url('../img/formwin-input-focus.png');
+}
+label.texts.focus:after {
+	content: url('../img/formwin-input-focus.png');
+}
+
+/* positive focus */
+label.texts.positive.focus,
+label.texts.positive.focus:before,
+label.texts.positive.focus:after {
+	background-image: url('../img/formwin-input-positive-focus.png');
+}
+label.texts.positive.focus:after {
+	content: url('../img/formwin-input-positive-focus.png');
+}
+
+/* negative focus */
+label.texts.negative.focus,
+label.texts.negative.focus:before,
+label.texts.negative.focus:after {
+	background-image: url('../img/formwin-input-negative-focus.png');
+}
+label.texts.negative.focus:after {
+	content: url('../img/formwin-input-negative-focus.png');
+}
+
+/* disabled */
+label.texts.disabled,
+label.texts.disabled:before,
+label.texts.disabled:after {
+	background-image: url('../img/formwin-input-disabled.png');
+}
+label.texts.disabled:after {
+	content: url('../img/formwin-input-disabled.png');
+}
+
+/* 
+------------------------------
+buttons
+------------------------------
+*/
+div.formwinbutton {
+	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat right -521px;
+	margin-left: 10px;
+}
+div.formwinbutton:before {
+	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat right -625px;
+	width: 10px;
+	height: 26px;
+	margin-left: -10px;
+}
+div.formwinbutton input {
+	height: 26px;
+	padding: 0 10px;
+	margin-left: -10px;
+}
+div.formwinbutton.focus,
+div.formwinbutton.hover {
+	background-position: right -547px;
+}
+div.formwinbutton.focus:before,
+div.formwinbutton.hover:before {
+	background-position: right -651px;
+}
+div.formwinbutton.active {
+	background-position: right -573px;
+}
+div.formwinbutton.active:before {
+	background-position: right -677px;
+}
+
+/* disabled default buttons */
+div.formwinbutton.disabled {
+	background-position: right -599px;
+}
+div.formwinbutton.disabled:before {
+	background-position: right -703px;
+}
+
+/* positive button */
+div.formwinbutton.positive {
+	background-position: right -729px; /* 521 + 208 */
+}
+div.formwinbutton.positive:before {
+	background-position: right -833px; /* 625 + 208 */
+}
+div.formwinbutton.positive.focus,
+div.formwinbutton.positive.hover {
+	background-position: right -755px;
+}
+div.formwinbutton.positive.focus:before,
+div.formwinbutton.positive.hover:before {
+	background-position: right -859px;
+}
+div.formwinbutton.positive.active {
+	background-position: right -781px;
+}
+div.formwinbutton.positive.active:before {
+	background-position: right -885px;
+}
+/* disabled positive button */
+div.formwinbutton.positive.disabled {
+	background-position: right -807px; /* 729 + 78 */
+}
+div.formwinbutton.positive.disabled:before {
+	background-position: right -911px; /* 833 + 78 */
+}
+
+/* negative button */
+div.formwinbutton.negative {
+	background-position: right -937px; /* 729 + 208 */
+}
+div.formwinbutton.negative:before {
+	background-position: right -1041px; /* 833 + 208 */
+}
+div.formwinbutton.negative.focus,
+div.formwinbutton.negative.hover {
+	background-position: right -963px;
+}
+div.formwinbutton.negative.focus:before,
+div.formwinbutton.negative.hover:before {
+	background-position: right -1067px;
+}
+div.formwinbutton.negative.active {
+	background-position: right -989px;
+}
+div.formwinbutton.negative.active:before {
+	background-position: right -1093px;
+}
+/* disabled negative button */
+div.formwinbutton.negative.disabled {
+	background-position: right -1015px; /* 937 + 78 */
+}
+div.formwinbutton.negative.disabled:before {
+	background-position: right -1119px; /* 1041 + 78 */
+}
+
+/* custom button */
+div.formwinbutton.custom1 {
+	background-position: right -1145px; /* + 208 */
+}
+div.formwinbutton.custom1:before {
+	background-position: right -1249px; /* + 208 */
+}
+div.formwinbutton.custom1.focus,
+div.formwinbutton.custom1.hover {
+	background-position: right -1171px;
+}
+div.formwinbutton.custom1.focus:before,
+div.formwinbutton.custom1.hover:before {
+	background-position: right -1275px;
+}
+div.formwinbutton.custom1.active {
+	background-position: right -1197px;
+}
+div.formwinbutton.custom1.active:before {
+	background-position: right -1301px;
+}
+/* disabled custom1 button */
+div.formwinbutton.custom1.disabled {
+	background-position: right -1223px; /* 1145 + 78 */
+}
+div.formwinbutton.custom1.disabled:before {
+	background-position: right -1327px; /* 1249 + 78 */
+}
