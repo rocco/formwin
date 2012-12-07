@@ -10,6 +10,8 @@ http://pixelmatrixdesign.com
 
 MIT License - http://www.opensource.org/licenses/mit-license.php
 */
+/*jslint browser: true */
+/*global jQuery */
 (function($){
 	"use strict";
 	
@@ -50,8 +52,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 	};
 	
 	// privates
-	var options = {},
-		thisIsIE8 = false,
+	var thisIsIE8 = false,
 		imagesPreloaded = false,
 		formwinHandlers = {
 			
@@ -90,7 +91,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			},
 			
 			// <textarea>
-			textarea: function($el, options){
+			textarea: function(){
 				preloadTextImages();
 			},
 			
@@ -99,9 +100,6 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				// selected option value is displayed in a <div> above the element
 				var 
 					$labelObj = $el.parent(),
-					// here we put the selected option's html()
-					$valueDiv = $('div.checkedvalue', $labelObj),
-					
 					// updates value div's html() to html() of selected option
 					valueUpdate = function(){
 						if($el.is(':checked') === true){
@@ -125,8 +123,6 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				// selected option value is displayed in a <div> above the element
 				var 
 					$labelObj = $el.parent(),
-					// here we put the selected option's html()
-					$valueDiv = $('div.checkedvalue', $labelObj),
 					
 					// updates value div's html() to html() of selected option
 					valueUpdate = function(){
@@ -202,7 +198,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			];
 			imagesPreloaded = true;
 			
-			return true;
+			return preloadTextImages;
 		},
 		
 		// noSelect v1.0
@@ -210,7 +206,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 		noSelect = function(elem){
 			var f = function(){
 				return false;
-			}
+			};
 			
 			$(elem).each(function(){
 				this.onselectstart = this.ondragstart = f; // Webkit & IE
@@ -219,7 +215,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				$(this).mousedown(f).css({
 					MozUserSelect: "none"
 				});
-			})
+			});
 		};
 	
 	
@@ -276,10 +272,8 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 		// also apply Formwin to all form elements with a label matching the options.formWinClassSel(ector)
 		$('label' + options.formWinClassSel).each(function(){
 			var 
-				el, 
 				tagName = '',
 				handlerName = '',
-				elType = '',
 				elLabel = this;
 			
 			// for each possible match in options.formWinSelector
