@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Formwin - form styles for IE8+</title>
+	
+	<!-- jQuery is needed -->
+	<script src="../demo/js/jquery-1.8.2.js"></script>
+	
+	<!-- Formwin includes, feel free to combine/compress/minify those -->
+	<link rel="stylesheet" type="text/css" href="../css/formwin-base.css">
+	<link rel="stylesheet" type="text/css" href="../css/formwin-sprite.css">
+	<link rel="stylesheet" type="text/css" href="../css/formwin-theme.css">
+	<script src="../js/jquery.formwin.js"></script>
+	
+	<!-- demo page specific includes -->
+	<link rel="stylesheet" type="text/css" href="../demo/css/demo.css">
+	
+	<!-- Formwin JS part -->
+	<script>
+		$(document).ready(function(){
+			// apply formwin to all form elements (formWinClassSel: 'label')
+			// applying to only those with class="formwin" would look like this: formWinClassSel: '.formwin' (including the dot)
+			$.formwin.init({
+				placeholderColor: '#999'
+			});
+
+			// fix label sizes on all form elements
+			$.formwin.fixlabels();
+		});
+	</script>
+	
+	<!-- unit test lib and styles -->
+	<link rel="stylesheet" href="css/qunit.css" type="text/css" />
+	<link rel="stylesheet" href="css/tests.css" type="text/css" />
+	<script src="js/qunit.js"></script>
+	
+	<!-- unit test setup -->
+	<script>
+		$(document).ready(function(){
+			
+			module('Formwin Lib');
+			
+			test('library structure', function(){
+				
+				// is $.formwin an object
+				same(typeof $.formwin, 'object', 'typeof $.formwin');
+				
+				// check public properties, should be: defaults{}, init(), fixlabels()
+				var i, 
+					count = 0, 
+					typeOfs = {
+						'defaults': 'object',
+						'init': 'function',
+						'fixlabels': 'function'
+					};
+				
+				for(i in $.formwin){
+					same(typeof $.formwin[i], typeOfs[i], 'typeof $.formwin["' + i + '"]');
+					count ++;
+				}
+				same(count, 3, 'public property count');
+			});
+			
+			
+			module('Markup Classes');
+			
+			// do all disabled form elements' labels or divs have the disabled class set?
+			asyncTest('disabled buttons', function(){
+				
+				var count = 0;
+				
+				$('div.formwinbutton input, div.formwinbutton button').each(function(){
+					if($(this).is(':disabled')){
+						ok($(this).parent().hasClass('disabled'), 'disabled class is set on #' + this.id);
+						count ++;
+					}
+				});
+				
+				same(count, 5, 'disabled button count');
+				start();
+			});
+			
+			asyncTest('disabled inputs', function(){
+				
+				var count = 0;
+				
+				// walk over all matching labels
+				$('label' + $.formwin.defaults.formWinClassSel).each(function(){
+					
+					// for each possible match in options.formWinSelector
+					$(this).children($.formwin.defaults.formWinSelector).each(function(){
+						if($(this).is(':disabled')){
+							ok($(this).parent().hasClass('disabled'), 'disabled class is set on #' + this.id);
+							count ++;
+						}
+					});
+					
+				});
+				
+				same(count, 9, 'disabled input count');
+				start();
+			});
+			
+			
+			module('Positions');
+			asyncTest('textarea position', function(){
+				
+				var 
+					textAreaOffset = $('#textarea_plain').offset(),
+					textAreaMargin = 12,
+					textAreaLabelOffset = $('#textarea_plain').parent().offset(),
+					inputTextOffset = $('#input_plain').offset(),
+					inputTextMargin = 12,
+					inputTextLabelOffset = $('#input_plain').parent().offset();
+				
+				textAreaLabelOffset.top += textAreaMargin;
+				textAreaLabelOffset.left += textAreaMargin;
+				
+				inputTextLabelOffset.top += inputTextMargin;
+				inputTextLabelOffset.left += inputTextMargin;
+				
+				same(textAreaLabelOffset, textAreaOffset, '#textarea_plain offset');
+				same(inputTextLabelOffset, inputTextOffset, '#input_plain offset');
+				
+				start();
+			});
+		});
+	</script>
+</head>
+<body>
+	
+	<form action="#">
+		
+		<label for="textarea_plain" class="formwintexts">
+			<textarea cols="40" rows="5" id="textarea_plain" placeholder="placeholder text 1"></textarea>
+		</label>
+		
+		<label for="textarea_above" class="formwintexts above">
+			<span>Textarea Label (above)</span>
+			<textarea cols="40" rows="5" id="textarea_above" style="width: 400px; height: 150px;">long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text long textarea text</textarea>
+		</label>
+		
+		<label for="textarea_right" class="formwintexts right positive">
+			<span>Textarea Label (right)</span>
+			<textarea cols="40" rows="5" id="textarea_right">textarea text</textarea>
+		</label>
+		
+		<label for="textarea_below" class="formwintexts below negative">
+			<span>Textarea Label (below)</span>
+			<textarea cols="40" rows="5" id="textarea_below">textarea text</textarea>
+		</label>
+		
+		<label for="textarea_left" class="formwintexts left disabled">
+			<span>Textarea Label (left)</span>
+			<textarea cols="40" rows="5" id="textarea_left" disabled="disabled">textarea text</textarea>
+		</label>
+		
+		<label for="input_plain" class="formwintexts">
+			<input type="text" id="input_plain" name="input_plain" placeholder="placeholder text" value="">
+		</label>
+		
+		<label for="input_above" class="formwintexts above">
+			<span>Input Label (above)</span>
+			<input type="text" id="input_above" name="input_above" value="input text appears here, yep that's right nowhere else">
+		</label>
+		
+		<label for="input_right" class="formwintexts right positive">
+			<span>Input Label (right)</span>
+			<input type="text" id="input_right" name="input_right" value="input text">
+		</label>
+		
+		<label for="input_below" class="formwintexts below negative">
+			<span>Input Label (below)</span>
+			<input type="text" id="input_below" name="input_below" value="input text">
+		</label>
+		
+		<label for="input_left" class="formwintexts left disabled">
+			<span>Input Label (left)</span>
+			<input type="text" id="input_left" name="input_left" value="input text" disabled="disabled">
+		</label>
+		
+		<label for="select_plain">
+			<div class="selectedvalue"><!-- optionally fill in selected option's text here --></div>
+			<select id="select_plain" name="select_plain">
+				<option value="0">One</option>
+				<option value="1">Two</option>
+				<option value="2">Three</option>
+			</select>
+		</label>
+		
+		<label for="select_above" class="above">
+			<span>Select Label (above)</span>
+			<div class="selectedvalue"></div>
+			<select id="select_above" name="select_above">
+				<option value="1">One One One</option>
+				<option value="2" selected="selected">Two Two Two</option>
+				<option value="3">Three Three Three</option>
+			</select>
+		</label>
+		
+		<label for="select_right" class="right">
+			<span>Select Label (right)</span>
+			<div class="selectedvalue">One</div>
+			<select id="select_right" name="select_right">
+				<option value="1">One</option>
+				<option value="2">Two</option>
+				<option value="3">Three</option>
+			</select>
+		</label>
+		
+		<label for="select_below" class="below">
+			<span>Select Label (below)</span>
+			<div class="selectedvalue"></div>
+			<select id="select_below" name="select_below">
+				<option value="1">One</option>
+				<option value="2">Two</option>
+				<option value="3">Three</option>
+			</select>
+		</label>
+		
+		<label for="select_left" class="left">
+			<span>Select Label (left)</span>
+			<div class="selectedvalue"></div>
+			<select id="select_left" name="select_left" disabled="disabled">
+				<option value="1">One</option>
+				<option value="2">Two</option>
+				<option value="3">Three</option>
+			</select>
+		</label>
+		
+		<label for="check_plain">
+			<div class="checkedvalue"></div>
+			<input type="checkbox" id="check_plain" name="check_plain" value="check_plain">
+		</label>
+		
+		<label for="check_above" class="above checked">
+			<span>Checkbox Label (above, checked)</span>
+			<div class="checkedvalue"></div>
+			<input type="checkbox" id="check_above" name="check_above" value="check_above" checked="checked">
+		</label>
+			
+		<label for="check_right" class="right">
+			<span>Checkbox Label (right)</span>
+			<div class="checkedvalue"></div>
+			<input type="checkbox" id="check_right" name="check_right" value="check_right">
+		</label>
+
+		<label for="check_below" class="below">
+			<span>Checkbox Label (below, disabled)</span>
+			<div class="checkedvalue"></div>
+			<input type="checkbox" id="check_below" name="check_below" value="check_below" disabled="disabled">
+		</label>
+
+		<label for="check_left" class="left">
+			<span>Checkbox Label (left, disabled, checked)</span>
+			<div class="checkedvalue"></div>
+			<input type="checkbox" id="check_left" name="check_left" value="check_left" disabled="disabled" checked="checked">
+		</label>
+
+		<label for="radio_plain_1">
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_plain" id="radio_plain_1" value="radio_plain_1">
+		</label>
+		<label for="radio_plain_2">
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_plain" id="radio_plain_2" value="radio_plain_2">
+		</label>
+		<label for="radio_plain_3">
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_plain" id="radio_plain_3" value="radio_plain_3">
+		</label>
+
+		<label for="radio_above_1" class="above">
+			<span>Radio Label (above)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_above" id="radio_above_1" value="radio_above_1">
+		</label>
+		<label for="radio_above_2" class="above checked">
+			<span>Radio Label (above and checked)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_above" id="radio_above_2" value="radio_above_2" checked="checked">
+		</label>
+		<label for="radio_above_3" class="above">
+			<span>Radio Label (above)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_above" id="radio_above_3" value="radio_above_3">
+		</label>
+
+		<label for="radio_right_1" class="right">
+			<span>Radio Label (right)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_right" id="radio_right_1" value="radio_right_1">
+		</label>
+		<br>
+		<label for="radio_right_2" class="right">
+			<span>Radio Label (right)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_right" id="radio_right_2" value="radio_right_2">
+		</label>
+		<br>
+		<label for="radio_right_3" class="right">
+			<span>Radio Label (right)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_right" id="radio_right_3" value="radio_right_3">
+		</label>
+
+		<label for="radio_below_1" class="below">
+			<span>Radio Label (below)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_below" id="radio_below_1" value="radio_below_1">
+		</label>
+		<label for="radio_below_2" class="below">
+			<span>Radio Label (below and checked)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_below" id="radio_below_2" value="radio_below_2" disabled="disabled">
+		</label>
+		<label for="radio_below_3" class="below">
+			<span>Radio Label (below)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_below" id="radio_below_3" value="radio_below_3">
+		</label>
+
+		<label for="radio_left_1" class="left">
+			<span>Radio Label (left, disabled)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_left" id="radio_left_1" value="radio_left_1" disabled="disabled">
+		</label>
+		<br>
+		<label for="radio_left_2" class="left">
+			<span>Radio Label (left, disabled)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_left" id="radio_left_2" value="radio_left_2" disabled="disabled">
+		</label>
+		<br>
+		<label for="radio_left_3" class="left">
+			<span>Radio Label (left, disabled, checked)</span>
+			<div class="radiovalue"></div>
+			<input type="radio" name="radio_left" id="radio_left_3" value="radio_left_3" disabled="disabled" checked="checked">
+		</label>
+
+		<div class="formwinbutton">
+			<input type="button" id="button_plain" value="Simple Input Button">
+		</div>
+
+		<div class="formwinbutton">
+			<input type="button" id="button_disabled" value="Disabled Input Button" disabled="disabled">
+		</div>
+
+		<div class="formwinbutton positive">
+			<input type="button" id="button_positive" value="Positive Input Button">
+		</div>
+
+		<div class="formwinbutton positive disabled">
+			<input type="button" id="button_positive_disabled" value="Disabled Positive Input Button" disabled="disabled">
+		</div>
+
+		<div class="formwinbutton negative">
+			<input type="button" id="button_negative" value="Negative Input Button">
+		</div>
+
+		<div class="formwinbutton negative">
+			<input type="button" id="button_negative_disabled" value="Disabled Negative Input Button" disabled="disabled">
+		</div>
+
+		<div class="formwinbutton custom1">
+			<input type="button" id="button_custom" value="Custom Input Button">
+		</div>
+
+		<div class="formwinbutton custom1">
+			<input type="button" id="button_custom_disabled" value="Disabled Custom Input Button" disabled="disabled">
+		</div>
+
+		<div class="formwinbutton">
+			<input type="submit" id="submit_plain" value="Submit Button">
+		</div>
+
+		<div class="formwinbutton">
+			<input type="submit" id="submit_disabled" value="Disabled Submit Button" disabled="disabled">
+		</div>
+
+		<button id="buttontag0">
+			Button Tag<br>
+			tbd
+		</button>
+			
+	</form>
+
+	<!-- unit test fixture -->
+	<div id="qunit-fixture">
+		
+		<div id="box-wrap">
+			<div id="box-wrap-inner">
+				<div id="box-1">1</div>
+				<div id="box-2">2</div>
+				<div id="box-3">3</div>
+				<div id="box-4">4</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<!-- unit test output -->
+	<div id="qunit-testresults">
+		<h1 id="qunit-header">Formwin Unit Tests <a href="#" onclick="$('#qunit-testresults').hide();" style="font-size: 12px;">hide this to see output</a></h1>
+		<h2 id="qunit-banner"></h2>
+		<div id="qunit-testrunner-toolbar"></div>
+		<h2 id="qunit-userAgent"></h2>
+		<ol id="qunit-tests"></ol>
+	</div>
+	
+</body>
+</html>
