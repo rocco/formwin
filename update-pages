@@ -1,0 +1,4 @@
+#!/bin/bash
+
+git checkout master -- .
+git rm -rf README.md TODO.md minify
