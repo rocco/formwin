@@ -1,9 +1,9 @@
 #!/bin/bash
 
-echo "... sending js/jquery.formwin.js to closure-compiler.appspot.com to generate js/jquery.formwin.min.js"
+echo "... generating formwin/js/jquery.formwin.min.js from formwin/js/jquery.formwin.js on closure-compiler.appspot.com"
 curl \
-	--data-urlencode js_code@js/jquery.formwin.js \
+	--data-urlencode js_code@formwin/js/jquery.formwin.js \
 	--data output_info=compiled_code \
 	--data output_format=text \
 	--data compilation_level=SIMPLE_OPTIMIZATIONS \
-	http://closure-compiler.appspot.com/compile > js/jquery.formwin.min.js
+	http://closure-compiler.appspot.com/compile > formwin/js/jquery.formwin.min.js

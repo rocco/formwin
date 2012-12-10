@@ -48,7 +48,10 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			
 			// theme-dependent value to calculate widths of div.selectedvalue
 			// = width of :before + width of padding-right, both of .selectedvalue divs
-			selectedvalueBorders: 10 + 36
+			selectedvalueBorders: 10 + 36,
+			
+			// path to formwin img folder
+			imagePath: ''
 		}
 	};
 	
@@ -94,8 +97,8 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			},
 			
 			// <textarea>
-			textarea: function(){
-				preloadTextImages();
+			textarea: function($el, options){
+				preloadTextImages(options);
 			},
 			
 			// <input type="check">
@@ -180,24 +183,24 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 		},
 		
 		// image preloader
-		preloadTextImages = function(){
+		preloadTextImages = function(options){
 			// return early on dejavu
 			if(imagesPreloaded !== false){
 				return true;
 			}
 			// preload images
 			var preloadTextImages = [
-				$('<img src="../img/formwin-input-active.png">'),
-				$('<img src="../img/formwin-input-disabled.png">'),
-				$('<img src="../img/formwin-input-focus.png">'),
-				$('<img src="../img/formwin-input-hover.png">'),
-				$('<img src="../img/formwin-input-negative-focus.png">'),
-				$('<img src="../img/formwin-input-negative-hover.png">'),
-				$('<img src="../img/formwin-input-negative.png">'),
-				$('<img src="../img/formwin-input-normal.png">'),
-				$('<img src="../img/formwin-input-positive-focus.png">'),
-				$('<img src="../img/formwin-input-positive-hover.png">'),
-				$('<img src="../img/formwin-input-positive.png">')
+				$('<img src="' + options.imagePath + 'formwin-input-active.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-disabled.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-focus.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-hover.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-negative-focus.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-negative-hover.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-negative.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-normal.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-positive-focus.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-positive-hover.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-positive.png">')
 			];
 			imagesPreloaded = true;
 			
@@ -239,6 +242,17 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			} else if($.browser.version < 9){
 				thisIsIE8 = true;
 			}
+		}
+		
+		// get script path if not set already
+		if(options.imagePath === ''){
+			$('script').each(function(){
+				var srcAttr = $(this).attr('src');  
+				if(typeof srcAttr !== 'undefined' && srcAttr.indexOf('jquery.formwin') >= 0){
+					options.imagePath = srcAttr.substr(0, srcAttr.lastIndexOf('/') + 1);
+					options.imagePath += '../img/';
+				}
+			});
 		}
 		
 		// apply Formwin to all divs with class button

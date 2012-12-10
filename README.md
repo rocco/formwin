@@ -9,6 +9,10 @@ Usually this means wrapping inputs and selects in a &lt;label&gt; and prepending
 		<input type="text" name="yourinput" id="yourinput">
 	</label>
 
+## Demo
+
+For a demo check out the [project page on GitHub](http://rocco.github.com/formwin/).
+
 ## Main Features
 
 - markup-driven, CSS heavy
@@ -23,7 +27,7 @@ Usually this means wrapping inputs and selects in a &lt;label&gt; and prepending
 
 ## Usage
 
-- make sure you are using jQuery on your site (1.8.2+ recommended)
+- make sure you are using jQuery on your site (1.7+ recommended)
 - output your HTML accordingly, see below
 - link Formwin's CSS files and JS file in &lt;head&gt; of your page
 - execute Formwin's init() to activate form element's class changes when document ready
