@@ -29,6 +29,7 @@ label input[type=radio] {
 	opacity: 0;
 	filter: alpha(opacity=0);
 	outline: none;
+	border: none;
 }
 
 /* label text span */
@@ -43,9 +44,17 @@ label span {
 select elements
 ------------------------------------
 */
+label div.selectedvalue {
+	display: inline-block;
+	vertical-align: top;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
 /* value div on selects */
 label div.selectedvalue:before {
+	position: absolute; /* required because of overflow: hidden above */
 	display: inline-block;
 	height: 100%;
 	vertical-align: top;

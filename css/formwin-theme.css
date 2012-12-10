@@ -73,8 +73,6 @@ label span {
 
 /* values on selects */
 label div.selectedvalue {
-	display: inline-block;
-	vertical-align: top;
 	line-height: 26px;
 }
 

@@ -46,8 +46,9 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			// color of placeholder text
 			placeholderColor: 'gray',
 			
-			// width by which the value div above selects is decreased after resizing, related to sprite
-			selectWidthAdapt: 27 
+			// theme-dependent value to calculate widths of div.selectedvalue
+			// = width of :before + width of padding-right, both of .selectedvalue divs
+			selectedvalueBorders: 10 + 36
 		}
 	};
 	
@@ -69,12 +70,14 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 						$el.parent().removeClass(options.activeClass);
 					};
 				
-				// set width of valueDiv to that of the select
-				// also we subtract options.selectWidthAdapt to shrink the element a bit
-				$valueDiv.width($el.width() - options.selectWidthAdapt);
+				// set width of valueDiv to that of the select minus options.selectedvalueBorders
+				// result is that valueDiv is exactly as wide as the select before
+				// problem here: widest option text is almost always cut off
+				// solution: set select widths in CSS
+				$valueDiv.width($el.width() - options.selectedvalueBorders);
 				
-				// set select width to 100% to fill entire valueDiv
-				$el.width('100%');
+				// set select width and height to 100% to fill entire valueDiv
+				$el.width('100%').height('100%');
 				
 				// update to initially selected value
 				valueUpdate();
