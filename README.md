@@ -36,10 +36,11 @@ For a demo check out the [project page on GitHub](http://rocco.github.com/formwi
 ### HTML Head Section
 Example &lt;head&gt; section (you should combine/compress those css files):
 
-	<link rel="stylesheet" type="text/css" href="../css/formwin-base.css">
-	<link rel="stylesheet" type="text/css" href="../css/formwin-sprite.css">
-	<link rel="stylesheet" type="text/css" href="../css/formwin-theme.css">
-	<script src="../js/jquery.formwin.js"></script>
+	<link rel="stylesheet" type="text/css" href="formwin/css/formwin-base.css">
+	<link rel="stylesheet" type="text/css" href="formwin/css/formwin-sprite.css">
+	<link rel="stylesheet" type="text/css" href="formwin/css/formwin-theme.css">
+	
+	<script src="formwin/js/jquery.formwin.js"></script>
 
 ### Library Execution
 
@@ -64,29 +65,43 @@ Example &lt;head&gt; section
 You can pass in the following parameters to Formwin's init() function:
 
 	$.formwin.init({
+		
 		// default is all labels, can be something like '.formwin' to get a jQuery selector like 'label.formwin'
 		formWinClassSel: '',
+			
 		// elements within labels that are matched
 		formWinSelector: 'select, textarea, input[type=text], input[type=checkbox], input[type=radio], input[type=button]',
+			
 		// CSS class for active elements
 		activeClass: 'active',
+			
 		// CSS class for elements with focus
 		focusClass: 'focus',
+			
 		// CSS class for hovered elements
 		hoverClass: 'hover',
+			
 		// CSS class for disabled elements
 		disabledClass: 'disabled',
+			
 		// CSS class for checked elements
 		checkedClass: 'checked',
+			
 		// color of placeholder text
 		placeholderColor: 'gray',
-		// width by which the value div above selects is decreased after resizing, related to sprite
-		selectWidthAdapt: 27
+			
+		// theme-dependent value to calculate widths of div.selectedvalue
+		// = width of :before + width of padding-right, both of .selectedvalue divs
+		selectedvalueBorders: 10 + 36,
+			
+		// path to formwin img folder
+		imagePath: ''
+		
 	});
 
 You might alternatively specify global defaults by using the "defaults" property.
 
-	$.formwin.defaults.disabledClass = 'myDisabledClass;
+	$.formwin.defaults.disabledClass = 'myDisabledClass';
 
 _This needs to be set before $.formwin.init();_
 
@@ -151,7 +166,7 @@ _This needs to be set before $.formwin.init();_
 # Customization
 
 Formwin's CSS is separated into three files to encapsulate different concerns. 
-You change formwin-sprite.css when you change the sprite image (img/formwin-sprite-default.png) and formwin-theme.css to change colors, fonts etc. _Those CSS files should be combined/compressed in production systems, usually along with other CSS files._
+You probably need to change formwin-sprite.css when you change the sprite image and it's sizes (img/formwin-sprite-default.png) and formwin-theme.css to change colors, fonts etc. _Those CSS files should be combined/compressed in production systems, usually along with other CSS files._
 
 Please set form element sizes via CSS directly on the elements as you would normally do. Dynamic resizing after $.formwin.init() works too. The only exception is &lt;select&gt;s where you would have to resize the div.selectedvalue instead of the &lt;select&gt; tag after $.formwin.init().
 
@@ -187,7 +202,7 @@ A: Nothing else did what I needed, namely:
 Q: Why do you not contribute this back to Uniform?<br>
 A: This was initially planned, but meanwhile Formwin follows a fundamentally different approach/concept/structure. I practically rebuilt the whole thing from scratch using some CSS rules and JS functions from [Uniform](https://github.com/pixelmatrix/uniform).
 
-Q: Why do you erroneously write "function(){ ... }" instead of "function () { ... }" in JS?<br>
+Q: Why do you _erroneously_ write "function(){ ... }" instead of "function () { ... }" in JS?<br>
 A: I hate useless whitespace and use syntax coloring, please try to deal with it.
 
 Q: Why do you indent with TABS instead of SPACES?<br>
