@@ -26,7 +26,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			formWinClassSel: '',
 			
 			// elements within labels that are matched
-			formWinSelector: 'select, textarea, input[type=text], input[type=checkbox], input[type=radio], input[type=button]',
+			formWinSelector: 'select, textarea, input[type=text], input[type=password], input[type=checkbox], input[type=radio], input[type=button]',
 			
 			// CSS class for active elements
 			activeClass: 'active',
@@ -244,17 +244,6 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			}
 		}
 		
-		// get script path if not set already
-		if(options.imagePath === ''){
-			$('script').each(function(){
-				var srcAttr = $(this).attr('src');  
-				if(typeof srcAttr !== 'undefined' && srcAttr.indexOf('jquery.formwin') >= 0){
-					options.imagePath = srcAttr.substr(0, srcAttr.lastIndexOf('/') + 1);
-					options.imagePath += '../img/';
-				}
-			});
-		}
-		
 		// apply Formwin to all divs with class button
 		$('div.formwinbutton').each(function(){
 			var elDiv = this;
@@ -399,3 +388,38 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 	};
 
 }(jQuery));
+
+// get script src
+// is this whole block a good idea?
+$('script').each(function(){
+	var srcAttr = $(this).attr('src');
+	// find the script that contains formwin
+	// in case of a concatenated script, add a class="formwincontained" to the script tag
+	if(
+		typeof srcAttr !== 'undefined' 
+		&& 
+		(
+			srcAttr.indexOf('jquery.formwin') >= 0
+			||
+			$(this).hasClass('formwincontained')
+		)){
+		
+		// get image path
+		$.formwin.defaults.imagePath = srcAttr.substr(0, srcAttr.lastIndexOf('/') + 1);
+		$.formwin.defaults.imagePath += '../img/';
+				
+		// formwinautoinit
+		if(srcAttr.lastIndexOf('formwinautoinit=true') > 0){
+			$(document).ready(function(){
+				$.formwin.init();
+			});
+		}
+		
+		// formwinautofixlabels
+		if(srcAttr.lastIndexOf('formwinautofixlabels=true') > 0){
+			$(document).ready(function(){
+				$.formwin.fixlabels();
+			});
+		}
+	}
+});
