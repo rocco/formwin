@@ -49,6 +49,7 @@ label span,
 label div.selectedvalue,
 label.formwintexts textarea,
 label.formwintexts input[type=text],
+label.formwintexts input[type=password],
 div.formwinbutton input {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 12px;

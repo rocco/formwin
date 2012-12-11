@@ -247,7 +247,8 @@ label.formwintexts:after {
 }
 
 label.formwintexts textarea,
-label.formwintexts input[type=text] {
+label.formwintexts input[type=text],
+label.formwintexts input[type=password] {
 	margin: 12px;                     /* corner width + default "padding" between label and input element */
 }
 

@@ -125,7 +125,8 @@ label.formwintexts:after {
 }
 
 label.formwintexts textarea,
-label.formwintexts input[type=text] {
+label.formwintexts input[type=text],
+label.formwintexts input[type=password] {
 	display: block;
 	padding: 0;
 	/* hide all input visuals */
