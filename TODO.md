@@ -8,3 +8,8 @@
 - active state on ANY keypress (selects, buttons)
 - make preloaded images for text inputs configurable
 - multiline &lt;button&gt;s
+
+# Issues
+
+- input[type=text] state "active" does not display/image not used
+-

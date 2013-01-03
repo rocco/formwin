@@ -51,7 +51,14 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			selectedvalueBorders: 10 + 36,
 			
 			// path to formwin img folder
-			imagePath: ''
+			imagePath: '',
+			
+			// automatically init formwin
+			autoInit: false,
+			
+			// automatically execute fixlabels
+			autoFixlabels: false
+			
 		}
 	};
 	
@@ -101,7 +108,12 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				preloadTextImages(options);
 			},
 			
-			// <input type="check">
+			// <input[type=text]>
+			text: function($el, options){
+				preloadTextImages(options);
+			},
+			
+			// <input[type=check]>
 			checkbox: function($el, options){
 				// selected option value is displayed in a <div> above the element
 				var 
@@ -124,7 +136,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				});
 			},
 			
-			// <input type="check">
+			// <input[type=radio]>
 			radio: function($el, options){
 				// selected option value is displayed in a <div> above the element
 				var 
@@ -191,9 +203,8 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			// preload images
 			var preloadTextImages = [
 				$('<img src="' + options.imagePath + 'formwin-input-active.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-disabled.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-focus.png">'),
 				$('<img src="' + options.imagePath + 'formwin-input-hover.png">'),
+				$('<img src="' + options.imagePath + 'formwin-input-focus.png">'),
 				$('<img src="' + options.imagePath + 'formwin-input-negative-focus.png">'),
 				$('<img src="' + options.imagePath + 'formwin-input-negative-hover.png">'),
 				$('<img src="' + options.imagePath + 'formwin-input-negative.png">'),
@@ -389,37 +400,20 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 
 }(jQuery));
 
-// get script src
-// is this whole block a good idea?
-$('script').each(function(){
-	var srcAttr = $(this).attr('src');
-	// find the script that contains formwin
-	// in case of a concatenated script, add a class="formwincontained" to the script tag
-	if(
-		typeof srcAttr !== 'undefined' 
-		&& 
-		(
-			srcAttr.indexOf('jquery.formwin') >= 0
-			||
-			$(this).hasClass('formwincontained')
-		)){
-		
-		// get image path
-		$.formwin.defaults.imagePath = srcAttr.substr(0, srcAttr.lastIndexOf('/') + 1);
-		$.formwin.defaults.imagePath += '../img/';
-				
-		// formwinautoinit
-		if(srcAttr.lastIndexOf('formwinautoinit=true') > 0){
-			$(document).ready(function(){
-				$.formwin.init();
-			});
-		}
-		
-		// formwinautofixlabels
-		if(srcAttr.lastIndexOf('formwinautofixlabels=true') > 0){
-			$(document).ready(function(){
-				$.formwin.fixlabels();
-			});
-		}
+// add $.formwinSettings to $.formwin.defaults
+$.formwin.defaults = $.extend($.formwin.defaults, $.formwinSettings);
+delete($.formwinSettings);
+
+// auto init
+if($.formwin.defaults.autoInit === true){
+	$(document).ready(function(){
+		$.formwin.init();
+	});
+	
+	// auto fix labels
+	if($.formwin.defaults.autoFixlabels === true){
+		$(document).ready(function(){
+			$.formwin.fixlabels();
+		});
 	}
-});
+}
