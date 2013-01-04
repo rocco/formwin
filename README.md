@@ -63,9 +63,16 @@ Example &lt;head&gt; section
 	
 #### Automatic Execution
 
-Both init() and fixlabels() can be automatically executed when the script loads by adding URL parameters _formwinautoinit=true_ and _formwinautofixlabels=true_ to the src="" attribute of the script tag that loads Formwin. Those can also be added to a compressed/minified script.
+Both init() and fixlabels() can be automatically executed when the script loads by adding settings to a settings object called  _$.formwinSettings_ before loading the lib. The $.formwinSettings object will be deleted when you load the lib.
 
-	<script src="formwin/js/jquery.formwin.js?formwinautoinit=true&amp;formwinautofixlabels=true"></script>
+	<script>
+		$.formwinSettings = {
+			autoInit: true,
+			autoFixlabels: true
+		};
+	</script>
+	<script src="res/formwin/js/jquery.formwin.js"></script>
+	
 
 ### Parameters
 
