@@ -84,7 +84,7 @@ You can pass in the following parameters to Formwin's init() function:
 		formWinClassSel: '',
 			
 		// elements within labels that are matched
-		formWinSelector: 'select, textarea, input[type=text], input[type=checkbox], input[type=radio], input[type=button]',
+		formWinSelector: 'select, textarea, input[type=text], input[type=password], input[type=checkbox], input[type=radio], input[type=button]',
 			
 		// CSS class for active elements
 		activeClass: 'active',
@@ -109,7 +109,13 @@ You can pass in the following parameters to Formwin's init() function:
 		selectedvalueBorders: 10 + 36,
 			
 		// path to formwin img folder
-		imagePath: ''
+		imagePath: '',
+			
+		// automatically init formwin
+		autoInit: false,
+			
+		// automatically execute fixlabels
+		autoFixlabels: false
 		
 	});
 
