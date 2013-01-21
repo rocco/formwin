@@ -5,13 +5,13 @@
 	<title>Formwin - form styles for IE8+</title>
 	
 	<!-- jQuery is needed -->
-	<script src="../demo/js/jquery-1.8.2.js"></script>
+	<script src="js/jquery-1.7.min.js"></script>
 	
 	<!-- Formwin includes, feel free to combine/compress/minify those -->
-	<link rel="stylesheet" type="text/css" href="../css/formwin-base.css">
-	<link rel="stylesheet" type="text/css" href="../css/formwin-sprite.css">
-	<link rel="stylesheet" type="text/css" href="../css/formwin-theme.css">
-	<script src="../js/jquery.formwin.js"></script>
+	<link rel="stylesheet" type="text/css" href="../formwin/css/formwin-base.css">
+	<link rel="stylesheet" type="text/css" href="../formwin/css/formwin-sprite.css">
+	<link rel="stylesheet" type="text/css" href="../formwin/css/formwin-theme.css">
+	<script src="../formwin/js/jquery.formwin.js?4"></script>
 	
 	<!-- demo page specific includes -->
 	<link rel="stylesheet" type="text/css" href="../demo/css/demo.css">
@@ -22,7 +22,8 @@
 			// apply formwin to all form elements (formWinClassSel: 'label')
 			// applying to only those with class="formwin" would look like this: formWinClassSel: '.formwin' (including the dot)
 			$.formwin.init({
-				placeholderColor: '#999'
+				placeholderColor: '#999',
+				imagePath: '../formwin/img/'
 			});
 
 			// fix label sizes on all form elements
@@ -52,16 +53,25 @@
 					typeOfs = {
 						'defaults': 'object',
 						'init': 'function',
-						'fixlabels': 'function'
+						'fixlabels': 'function',
+						'preloadedImages': 'object'
 					};
 				
 				for(i in $.formwin){
 					same(typeof $.formwin[i], typeOfs[i], 'typeof $.formwin["' + i + '"]');
 					count ++;
 				}
-				same(count, 3, 'public property count');
+				same(count, 4, 'public property count');
 			});
 			
+			module('Preloader');
+			
+			// do all disabled form elements' labels or divs have the disabled class set?
+			asyncTest('all images loaded', function(){
+				
+				same($.formwin.preloadedImages.length, 10, 'all images pre-loaded');
+				start();
+			});
 			
 			module('Markup Classes');
 			
@@ -102,8 +112,8 @@
 				start();
 			});
 			
-			
 			module('Positions');
+			
 			asyncTest('textarea position', function(){
 				
 				var 
@@ -125,6 +135,7 @@
 				
 				start();
 			});
+			
 		});
 	</script>
 </head>
