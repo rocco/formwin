@@ -17,6 +17,8 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 	
 	// globals
 	$.formwin = {
+		// stores preloaded images
+		preloadedImages: [],
 		// Default options that can be overridden globally or when calling $.formwin.init()
 		// globally: $.formwin.defaults.formWinClassSel = '.formwin';
 		// on init : $.formwin.init({formWinClassSel: '.formwin'});
@@ -200,19 +202,19 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			if(imagesPreloaded !== false){
 				return true;
 			}
-			// preload images
-			var preloadTextImages = [
-				$('<img src="' + options.imagePath + 'formwin-input-active.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-hover.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-focus.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-negative-focus.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-negative-hover.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-negative.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-normal.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-positive-focus.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-positive-hover.png">'),
-				$('<img src="' + options.imagePath + 'formwin-input-positive.png">')
-			];
+			
+			// preload images and save name to array on success
+			$('<img src="' + options.imagePath + 'formwin-input-active.png">').load(function(){ $.formwin.preloadedImages.push('active'); });
+			$('<img src="' + options.imagePath + 'formwin-input-hover.png">').load(function(){ $.formwin.preloadedImages.push('hover'); });
+			$('<img src="' + options.imagePath + 'formwin-input-focus.png">').load(function(){ $.formwin.preloadedImages.push('focus'); });
+			$('<img src="' + options.imagePath + 'formwin-input-negative-focus.png">').load(function(){ $.formwin.preloadedImages.push('negative-focus'); });
+			$('<img src="' + options.imagePath + 'formwin-input-negative-hover.png">').load(function(){ $.formwin.preloadedImages.push('negative-hover'); });
+			$('<img src="' + options.imagePath + 'formwin-input-negative.png">').load(function(){ $.formwin.preloadedImages.push('negative'); });
+			$('<img src="' + options.imagePath + 'formwin-input-normal.png">').load(function(){ $.formwin.preloadedImages.push('normal'); });
+			$('<img src="' + options.imagePath + 'formwin-input-positive-focus.png">').load(function(){ $.formwin.preloadedImages.push('positive-focus'); });
+			$('<img src="' + options.imagePath + 'formwin-input-positive-hover.png">').load(function(){ $.formwin.preloadedImages.push('positive-hover'); });
+			$('<img src="' + options.imagePath + 'formwin-input-positive.png">').load(function(){ $.formwin.preloadedImages.push('positive'); });
+			
 			imagesPreloaded = true;
 			
 			return preloadTextImages;
