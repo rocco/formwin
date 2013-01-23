@@ -9,13 +9,22 @@ select elements
 ------------------------------
 */
 
-/* value div on selects */
+/* left corners */
 label div.selectedvalue:before {
 	width: 10px;
 	margin-left: -10px;
-	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat -483px -130px;       /* left corners */
+	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat -483px -130px;
 }
 
+/* right corners */
+label div.selectedvalue {
+	height: 26px;
+	margin-left: 10px;
+	padding-right: 26px;
+	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat right 0px;
+}
+
+/* active */ 
 label:active div.selectedvalue:before, 
 label.active div.selectedvalue:before {
 	background-position: -483px -156px;
@@ -26,32 +35,55 @@ label.active div.selectedvalue {
 	background-position: right -26px;
 }
 
-label.focus div.selectedvalue:before, 
+label.active div.selectedvalue:before {
+	background-position: -483px -208px;
+}
+
+label.active div.selectedvalue {
+	background-position: right -78px;
+}
+
+/* hover */
 label.hover div.selectedvalue:before, 
 label:hover div.selectedvalue:before {
+	background-position: -483px -156px;
+}
+
+label.hover div.selectedvalue, 
+label:hover div.selectedvalue {
+	background-position: right -26px;
+}
+
+label:hover:active div.selectedvalue:before,
+label.active:hover div.selectedvalue:before {
 	background-position: -483px -182px;
 }
 
-label.focus div.selectedvalue, 
-label.hover div.selectedvalue, 
-label:hover div.selectedvalue {
+label:hover:active div.selectedvalue,
+label.active:hover div.selectedvalue {
+	background-position: right -52px;
+}
+
+/* focus */
+label.focus div.selectedvalue:before {
+	background-position: -483px -182px;
+}
+
+label.focus div.selectedvalue {
 	background-position: right -52px;
 }
 
 label.focus:active div.selectedvalue:before,
-label.focus.active div.selectedvalue:before,
-label:hover:active div.selectedvalue:before,
-label.active:hover div.selectedvalue:before {
+label.focus.active div.selectedvalue:before {
 	background-position: -483px -208px;
 }
 
 label.focus:active div.selectedvalue,
-label.focus.active div.selectedvalue,
-label:hover:active div.selectedvalue,
-label.active:hover div.selectedvalue {
+label.focus.active div.selectedvalue {
 	background-position: right -78px;
 }
 
+/* disabled */
 label.disabled div.selectedvalue:before,
 label.disabled.active div.selectedvalue:before,
 label.disabled:active div.selectedvalue:before {
@@ -64,33 +96,7 @@ label.disabled:active div.selectedvalue {
 	background-position: right -104px;
 }
 
-label div.selectedvalue {
-	height: 26px;
-	margin-left: 10px;
-	padding-right: 26px;
-	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat right 0px;       /* right corners */
-}
-
-label.focus div.selectedvalue:before,
-label.hover div.selectedvalue:before {
-	background-position: -483px -182px;
-}
-
-label.active div.selectedvalue:before {
-	background-position: -483px -208px;
-}
-
-label.focus div.selectedvalue,
-label.hover div.selectedvalue {
-	background-position: right -52px;
-}
-
-label.active div.selectedvalue {
-	background-position: right -78px;
-}
-
-
-/* 
+/*
 ------------------------------
 checkboxes
 ------------------------------
