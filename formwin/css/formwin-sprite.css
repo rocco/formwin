@@ -106,10 +106,10 @@ checkboxes
 label div.checkedvalue {
 	height: 19px;
 	width: 19px;
-	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat 0px -260px;       /* right corners */
+	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat 0px -260px;
 }
 
-/* unchecked states */
+/* unchecked */
 label:active div.checkedvalue,
 label.active div.checkedvalue {
 	background-position: -19px -260px;
@@ -127,13 +127,7 @@ label.focus.active div.checkedvalue {
 	background-position: -57px -260px;
 }
 
-label.disabled div.checkedvalue,
-label.disabled:active div.checkedvalue,
-label.disabled.active div.checkedvalue {
-	background-position: -152px -260px;
-}
-
-/* checked state */
+/* checked */
 label.checked div.checkedvalue {
 	background-position: -76px -260px;
 }
@@ -155,6 +149,13 @@ label.checked.active.focus div.checkedvalue {
 	background-position: -133px -260px;
 }
 
+/* disabled */
+label.disabled div.checkedvalue,
+label.disabled:active div.checkedvalue,
+label.disabled.active div.checkedvalue {
+	background-position: -152px -260px;
+}
+	
 label.checked.disabled div.checkedvalue,
 label.checked.disabled:active div.checkedvalue,
 label.checked.disabled.active div.checkedvalue {
@@ -172,10 +173,10 @@ radios
 label div.radiovalue {
 	height: 18px;
 	width: 18px;
-	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat 0px -279px;       /* right corners */
+	background: transparent url('../img/formwin-sprite-default.png') scroll no-repeat 0px -279px;
 }
 
-/* unchecked states */
+/* unchecked */
 label:active div.radiovalue,
 label.active div.radiovalue {
 	background-position: -18px -279px;
@@ -193,6 +194,7 @@ label.active.focus div.radiovalue {
 	background-position: -54px -279px;
 }
 
+/* checked */
 label.checked div.radiovalue {
 	background-position: -72px -279px;
 }
@@ -214,6 +216,7 @@ label.active.checked:hover div.radiovalue {
 	background-position: -126px -279px;
 }
 
+/* disabled */
 label.disabled div.radiovalue,
 label.disabled:active div.radiovalue,
 label.disabled.active div.radiovalue {
