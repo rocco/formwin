@@ -82,40 +82,46 @@ You can pass in the following parameters to Formwin's init() function:
 		
 		// default is all labels, can be something like '.formwin' to get a jQuery selector like 'label.formwin'
 		formWinClassSel: '',
-			
+		
 		// elements within labels that are matched
 		formWinSelector: 'select, textarea, input[type=text], input[type=password], input[type=checkbox], input[type=radio], input[type=button]',
-			
+		
 		// CSS class for active elements
 		activeClass: 'active',
-			
+		
 		// CSS class for elements with focus
 		focusClass: 'focus',
-			
+		
 		// CSS class for hovered elements
 		hoverClass: 'hover',
-			
+		
 		// CSS class for disabled elements
 		disabledClass: 'disabled',
-			
+		
 		// CSS class for checked elements
 		checkedClass: 'checked',
-			
+		
 		// color of placeholder text
 		placeholderColor: 'gray',
-			
+		
 		// theme-dependent value to calculate widths of div.selectedvalue
 		// = width of :before + width of padding-right, both of .selectedvalue divs
 		selectedvalueBorders: 10 + 36,
-			
+		
 		// path to formwin img folder
 		imagePath: '',
-			
+		
 		// automatically init formwin
 		autoInit: false,
-			
+		
 		// automatically execute fixlabels
-		autoFixlabels: false
+		autoFixlabels: false,
+		
+		// label offset to the left
+		leftLabelOffset: 0,
+		
+		// label offset to the right
+		rightLabelOffset: 0
 		
 	});
 

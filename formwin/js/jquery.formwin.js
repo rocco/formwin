@@ -59,7 +59,13 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			autoInit: false,
 			
 			// automatically execute fixlabels
-			autoFixlabels: false
+			autoFixlabels: false,
+			
+			// label offset to the left
+			leftLabelOffset: 0,
+			
+			// label offset to the right
+			rightLabelOffset: 0
 			
 		}
 	};
@@ -395,8 +401,8 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			if($(this).hasClass('left')){
 				propName = 'left';
 			}
-			$(this).css('margin-' + propName, (labelWidth + 10) + 'px');
-			$elSpan.css(propName, ((labelWidth + 10) * -1) + 'px');
+			$(this).css('margin-' + propName, (labelWidth + 10 + options[propName + 'LabelOffset']) + 'px');
+			$elSpan.css(propName, ((labelWidth + 10 + options[propName + 'LabelOffset']) * -1) + 'px');
 		});
 	};
 
