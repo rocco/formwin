@@ -19,7 +19,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 	$.formwin = {
 
 		// formwin version
-		version: 0.1.0,
+		version: '0.1.0',
 
 		// stores preloaded images
 		preloadedImages: [],
