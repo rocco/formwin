@@ -74,7 +74,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 	};
 
 	// privates
-	var thisIsIE8 = false,
+	var thisIsIE = false,
 		imagesPreloaded = false,
 		formwinHandlers = {
 
@@ -189,7 +189,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				$el.bind('touchend', valueUpdate);
 			}
 		},
-		
+
 		// IE placeholder management
 		showPlaceholder = function (elem, options) {
 			var pH = $(elem).attr('placeholder');
@@ -206,14 +206,14 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				}
 			}
 		},
-		
+
 		// image preloader
 		preloadTextImages = function (options) {
 			// return early on dejavu
 			if (imagesPreloaded !== false) {
 				return true;
 			}
-			
+
 			// preload images and save name to array on success
 			$('<img src="' + options.imagePath + 'formwin-input-active.png">').load(function () { $.formwin.preloadedImages.push('active'); });
 			$('<img src="' + options.imagePath + 'formwin-input-hover.png">').load(function () { $.formwin.preloadedImages.push('hover'); });
@@ -225,19 +225,19 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 			$('<img src="' + options.imagePath + 'formwin-input-positive-focus.png">').load(function () { $.formwin.preloadedImages.push('positive-focus'); });
 			$('<img src="' + options.imagePath + 'formwin-input-positive-hover.png">').load(function () { $.formwin.preloadedImages.push('positive-hover'); });
 			$('<img src="' + options.imagePath + 'formwin-input-positive.png">').load(function () { $.formwin.preloadedImages.push('positive'); });
-			
+
 			imagesPreloaded = true;
-			
+
 			return preloadTextImages;
 		},
-		
+
 		// noSelect v1.0
 		// avoids selection of text (esp. on touch devices)
 		noSelect = function (elem) {
 			var f = function () {
 				return false;
 			};
-			
+
 			$(elem).each(function () {
 				this.onselectstart = this.ondragstart = f; // Webkit & IE
 				// .mousedown() for Webkit and Opera
@@ -247,38 +247,36 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				});
 			});
 		};
-	
-	
+
+
 	// globals again
-	
+
 	/*
 	 * adds action/state classes to divs/labels around buttons/inputs
 	 * executes the formwinHandlers for matched elements
 	 */
 	$.formwin.init = function (options) {
 		options = $.extend({}, $.formwin.defaults, options);
-		
-		// IE6/7 can't/won't be styled, only IE8+ is taken care of
-		if ($.browser.msie) {
-			if ($.browser.version < 8) {
-				// do nothing for IE < 8
-				return false;
-			} else if ($.browser.version < 9) {
-				thisIsIE8 = true;
-			}
+
+		// do special stuff for all IEs < 9, only IE8 is supported tho
+		// necessary because IE8 also reports $.browser.version === "7.0" 
+		// when "Intranetsites in Compatibility Mode" is activated
+		// even with compat header, meta tag and option actively set/deactivated
+		if ($.browser.msie && $.browser.version < 9) {
+			thisIsIE = true;
 		}
-		
+
 		// apply Formwin to all divs with class button
 		$('div.formwinbutton').each(function () {
 			var elDiv = this;
-			
+
 			// set disabled class
 			if ($('input, button', this).is(':disabled') === true) {
 				$(elDiv).addClass(options.disabledClass);
 			} else {
 				$(elDiv).removeClass(options.disabledClass);
 			}
-			
+
 			// trigger classes on contained inputs and buttons
 			$('input, button', this).focus(function () {
 				// add focus class
@@ -298,33 +296,33 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				$(elDiv).removeClass(options.activeClass);
 			});
 		});
-		
+
 		// also apply Formwin to all form elements with a label matching the options.formWinClassSel(ector)
 		$('label' + options.formWinClassSel).each(function () {
 			var
 				tagName = '',
 				handlerName = '',
 				elLabel = this;
-			
+
 			// for each possible match in options.formWinSelector
 			$(this).children(options.formWinSelector).each(function () {
-				
+
 				// get actual tag name of $(this) ... we use a multi-selector
 				tagName = $(this)[0].outerHTML.match(/[^<][^ ]*/)[0].toLowerCase();
 				// initialize all placeholders in IE8
-				if (thisIsIE8 === true && (tagName === 'textarea' || tagName === 'input') && typeof $(this).attr('placeholder') !== 'undefined') {
+				if (thisIsIE === true && (tagName === 'textarea' || tagName === 'input') && typeof $(this).attr('placeholder') !== 'undefined') {
 					// memorize original input color
 					$(this).data('formwinOriginalColor', $(this).css('color'));
 					showPlaceholder(this, options);
 				}
-				
+
 				// trigger focus class on labels whenever contained form elements get focus
 				$(this).focus(function () {
 					// add focus class
 					$(elLabel).addClass(options.focusClass);
-					
+
 					// placeholders in IE8: remove when it's currently shown
-					if (thisIsIE8 === true && typeof $(this).attr('placeholder') !== 'undefined' && $(this).hasClass('formwin-showplaceholder')) {
+					if (thisIsIE === true && typeof $(this).attr('placeholder') !== 'undefined' && $(this).hasClass('formwin-showplaceholder')) {
 						$(this)
 							.val('')
 							.css('color', $(this).data('formwinOriginalColor'));
@@ -334,7 +332,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 					$(elLabel).removeClass(options.focusClass);
 					$(elLabel).removeClass(options.activeClass);
 					// placeholders in IE8: show placeholder when value is empty
-					if (thisIsIE8 === true && typeof $(this).attr('placeholder') !== 'undefined') {
+					if (thisIsIE === true && typeof $(this).attr('placeholder') !== 'undefined') {
 						if ($(this).val() === '') {
 							showPlaceholder(this, options);
 						} else {
@@ -351,21 +349,21 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				}).on('keyup mouseup touchend', function () {
 					$(elLabel).removeClass(options.activeClass);
 				});
-				
+
 				// set disabled class
 				if ($(this).is(':disabled') === true) {
 					$(elLabel).addClass(options.disabledClass);
 				} else {
 					$(elLabel).removeClass(options.disabledClass);
 				}
-				
+
 				if (tagName === 'input') {
 					// allowed = " color date datetime datetime-local email month number password search tel text time url week ";
 					handlerName = $(this).attr("type").toLowerCase();
 				} else {
 					handlerName = tagName;
 				}
-				
+
 				// execute the formwinHandler matching this handlerName if there is one
 				if (typeof formwinHandlers[handlerName] !== 'undefined') {
 					formwinHandlers[handlerName]($(this), options);
@@ -379,7 +377,7 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 	 */
 	$.formwin.fixlabels = function (options) {
 		options = $.extend({}, $.formwin.defaults, options);
-		
+
 		// labels above and below
 		$('label' + options.formWinClassSel + '.above, label' + options.formWinClassSel + '.below').each(function () {
 			var
@@ -403,14 +401,14 @@ MIT License - http://www.opensource.org/licenses/mit-license.php
 				$elSpan.parent().css('width', labelWidth + 'px');
 			}
 		});
-		
+
 		// labels to the right and left
 		$('label' + options.formWinClassSel + '.left, label' + options.formWinClassSel + '.right').each(function () {
 			var
 				$elSpan = $('span', this).css('white-space', 'nowrap'),
 				labelWidth = $elSpan.width(),
 				propName = 'right';
-			
+
 			if ($(this).hasClass('left')) {
 				propName = 'left';
 			}
@@ -431,7 +429,7 @@ if ($.formwin.defaults.autoInit === true) {
 		"use strict";
 		$.formwin.init();
 	});
-	
+
 	// auto fix labels
 	if ($.formwin.defaults.autoFixlabels === true) {
 		$(document).ready(function () {
